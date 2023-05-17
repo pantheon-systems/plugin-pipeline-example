@@ -1,11 +1,11 @@
 === Rossums Universal Robots ===
-Contributors: (this should be a list of wordpress.org userid's)
+Contributors: [getpantheon](https://profiles.wordpress.org/getpantheon)
 Donate link: https://example.com/
 Tags: comments, spam
 Requires at least: 4.5
 Tested up to: 6.2.1
 Requires PHP: 5.6
-Stable tag: 0.1.0
+Stable tag: 0.1.0-dev
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -68,20 +68,8 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 
 == Changelog ==
 
-= 1.0 =
-* A change since the previous version.
-* Another change.
-
-= 0.5 =
-* List versions from most recent at top to oldest at bottom.
-
-== Upgrade Notice ==
-
-= 1.0 =
-Upgrade notices describe the reason a user should upgrade.  No more than 300 characters.
-
-= 0.5 =
-This version fixes a security related bug.  Upgrade immediately.
+= 0.1.0-dev =
+* Initial Release [[1](https://github.com/pantheon-systems/plugin-pipeline-example/pull/1)]
 
 == Arbitrary section ==
 
