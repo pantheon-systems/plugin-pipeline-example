@@ -1,0 +1,30 @@
+{
+    "name": "pantheon-systems/rossums-universal-robots",
+    "description": "A demo plugin to test and showcase github actions during plugin development and release",
+    "type": "wordpress-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "CMS PLatform",
+            "email": "cms-platform@pantheon.io"
+        }
+    ],
+    "require-dev": {
+        "pantheon-systems/pantheon-wp-coding-standards": "^1.0",
+        "pantheon-systems/pantheon-wordpress-upstream-tests": "dev-master",
+        "phpunit/phpunit": "^9",
+        "yoast/phpunit-polyfills": "^1.0"
+      },
+      "scripts": {
+        "lint": "@phpcs",
+        "phpcs": "vendor/bin/phpcs",
+        "phpcbf": "vendor/bin/phpcbf",
+        "phpunit": "vendor/bin/phpunit",
+        "test": "@phpunit"
+      },
+      "config": {
+        "allow-plugins": {
+          "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+      }
+}
