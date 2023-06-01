@@ -1,0 +1,35 @@
+{
+  "name": "plugin-pipeline-example",
+  "version": "0.1.0-dev",
+  "description": "A demo plugin to test and showcase github actions during plugin development and release",
+  "main": "Gruntfile.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "grunt build",
+    "watch": "grunt watch",
+    "lint:js": "grunt jshint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pantheon-systems/plugin-pipeline-example.git"
+  },
+  "author": "CMS Platform <cms-platform@pantheon.io>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pantheon-systems/plugin-pipeline-example/issues"
+  },
+  "homepage": "https://github.com/pantheon-systems/plugin-pipeline-example#readme",
+  "dependencies": {
+    "grunt": "^1.6.1",
+    "grunt-autoprefixer": "^3.0.4",
+    "grunt-contrib-cssmin": "^5.0.0",
+    "grunt-contrib-jshint": "^3.2.0",
+    "grunt-contrib-uglify": "^5.2.2",
+    "grunt-contrib-watch": "^1.1.0",
+    "grunt-sass": "^3.1.0",
+    "node-sass": "^9.0.0"
+  }
+}
