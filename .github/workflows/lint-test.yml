@@ -9,10 +9,6 @@ jobs:
       DB_PASSWORD: root
       DB_HOST: localhost
     steps:
-      - name: Install Node
-        uses: actions/setup-node@v2
-        with:
-          node-version: '18'
       - uses: actions/checkout@v2
       - name: Install NPM & Composer dependencies
         run: |
