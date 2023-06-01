@@ -1,0 +1,37 @@
+name: Build and PR
+on:
+  push:
+    branches:
+      - release # This isn't the right place to do this...need to figure out the best trigger.
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Release
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+      - name: Build
+        run: |
+          echo "Building..."
+          npm ci
+          npm run build
+          composer install --no-dev -o
+          echo "Build complete."
+      - name: Setup
+        run: 'echo "VERSION=$(jq -r .version ./package.json)" >> $GITHUB_ENV'
+      - name: Create PR
+        run: |
+          echo "Creating release PR for version $VERSION..."
+          git config user.name "Pantheon Automation"
+          git config user.email bot@getpantheon.com
+          git checkout -b "release-$VERSION"
+          git add -f assets/* vendor/
+          git commit -m "Release $VERSION"
+          gh pr create --title "Release $VERSION" --body "Release $VERSION" --base release --head "release-$VERSION"
+          echo "Release PR created."
+          gh pr list --author bot@getpantheon.com --state open --limit 1
