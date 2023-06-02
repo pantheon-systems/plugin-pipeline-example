@@ -6,12 +6,12 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - name: Bail Out! # remove this step to actually deploy to wp.org
-        run: exit 1
-      - uses: actions/checkout@v2
-      - name: WordPress Plugin Deploy
-        uses: 10up/action-wordpress-plugin-deploy@2.1.1
-        env:
-          SVN_USERNAME: ${{ secrets.WPORG_USERNAME }}
-          SVN_PASSWORD: ${{ secrets.WPORG_PASSWORD }}
-          SLUG: rossums-universal-robots
+      - name: Deploy!
+        run: exit 0
+      # - uses: actions/checkout@v2
+      # - name: WordPress Plugin Deploy
+      #   uses: 10up/action-wordpress-plugin-deploy@2.1.1
+      #   env:
+      #     SVN_USERNAME: ${{ secrets.WPORG_USERNAME }}
+      #     SVN_PASSWORD: ${{ secrets.WPORG_PASSWORD }}
+      #     SLUG: rossums-universal-robots
