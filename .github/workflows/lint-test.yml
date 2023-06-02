@@ -38,6 +38,9 @@ jobs:
           repository: WordPress/wporg-code-analysis
           ref: trunk
           path: wporg-code-analysis
+        with:
+          repository: pantheon-systems/plugin-pipeline-example
+          ref: $GITHUB_REF
       - name: WP.org Code Analysis
         run: |
           path=$(pwd)
