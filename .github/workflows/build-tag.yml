@@ -11,9 +11,11 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
-
+    # TODO: In the future, with-node should be an optional param in the action.
     - name: Build
       run: |
+        npm ci
+        npm run build
         composer install --no-dev -o
     - name: Setup
       run: |
@@ -28,6 +30,7 @@ jobs:
         git config user.name Pantheon Automation
         git config user.email bot@getpantheon.com
         git checkout -b "robot-release-$VERSION"
+        git add -f assets/* # TODO: In the future, this should be keyed off of a parameter in the action that toggles whether we should build assets.
         git add -f vendor/*
         git commit -m "Release $VERSION"
         git tag "$VERSION"
