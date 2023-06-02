@@ -44,7 +44,7 @@ jobs:
           echo "Setting up WP.org Code Analysis"
           composer install
           echo "Running bash ./bin/scan-dir.sh -ns ${{ github.workspace }}"
-          vendor/bin/phpcs  -s --standard=./MinimalPluginStandard ${{ github.workspace }}
+          vendor/bin/phpcs  -s --standard=./MinimalPluginStandard ${{ github.workspace }} --ignore=wporg-code-analysis/*
   phpcompatibility:
     runs-on: ubuntu-latest
     name: PHP Compatibility
