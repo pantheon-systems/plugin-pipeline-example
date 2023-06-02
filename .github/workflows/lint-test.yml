@@ -34,9 +34,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          repository: WordPress/wporg-code-analysis
+          ref: trunk
+          path: wporg-code-analysis
       - name: WP.org Code Analysis
         run: |
-          git clone git@github.com:WordPress/wporg-code-analysis.git
           cd wporg-code-analysis
           composer install
           ./bin/scan-dir.sh -ns ${{ github.workspace }}
