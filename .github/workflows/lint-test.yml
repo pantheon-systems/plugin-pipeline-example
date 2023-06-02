@@ -43,6 +43,7 @@ jobs:
           cd wporg-code-analysis
           echo "Setting up WP.org Code Analysis"
           composer install -n
+          vendor/bin/phpcs -s --standard=MinimalPluginStandard --ignore=wporg-code-analysis/* --report=summary ../
   phpcompatibility:
     runs-on: ubuntu-latest
     name: PHP Compatibility
