@@ -40,10 +40,11 @@ jobs:
           path: wporg-code-analysis
       - name: WP.org Code Analysis
         run: |
+          path=$(pwd)
           cd wporg-code-analysis
           echo "Setting up WP.org Code Analysis"
           composer install -n
-          vendor/bin/phpcs -s --standard=MinimalPluginStandard --ignore=wporg-code-analysis/* --report=summary ../
+          vendor/bin/phpcs -s -v --standard=MinimalPluginStandard --ignore=wporg-code-analysis/* --report=summary $path
   phpcompatibility:
     runs-on: ubuntu-latest
     name: PHP Compatibility
