@@ -5,8 +5,8 @@ on:
       - 'release'
 
 jobs:
-  wordpress:
-    name: Release
+  tag:
+    name: Tag with Assets
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
