@@ -28,6 +28,18 @@ jobs:
         run: composer lint
       - name: Run tests
         run: composer test
+  wporg-code-analysis:
+    runs-on: ubuntu-latest
+    name: WP.org Code Analysis
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: WP.org Code Analysis
+        run: |
+          git clone git@github.com:WordPress/wporg-code-analysis.git
+          cd wporg-code-analysis
+          composer install
+          ./bin/scan-dir.sh -ns ${{ github.workspace }}
   phpcompatibility:
     runs-on: ubuntu-latest
     name: PHP Compatibility
@@ -37,7 +49,7 @@ jobs:
       - run: echo "Note these tests may be incomplete for newer PHP version and miss some deprecations"
         shell: bash
       - name: PHPCompatibility
-        # using @dev because PHPCompatibility ^9 does not yet have the 
+        # using @dev because PHPCompatibility ^9 does not yet have the
         # sniffers for 8.0+ but main branch does
         uses: pantheon-systems/phpcompatibility-action@dev
         with:
