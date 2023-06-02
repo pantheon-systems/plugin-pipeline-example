@@ -14,6 +14,8 @@ jobs:
 
     - name: Build
       run: |
+        npm ci
+        npm run build
         composer install --no-dev -o
     - name: Setup
       run: |
