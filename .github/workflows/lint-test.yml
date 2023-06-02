@@ -9,7 +9,7 @@ jobs:
       DB_PASSWORD: root
       DB_HOST: localhost
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Install NPM & Composer dependencies
         run: |
           composer install
@@ -28,3 +28,17 @@ jobs:
         run: composer lint
       - name: Run tests
         run: composer test
+  phpcompatibility:
+    runs-on: ubuntu-latest
+    name: PHP Compatibility
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - run: echo "Note these tests may be incomplete for newer PHP version and miss some deprecations"
+        shell: bash
+      - name: PHPCompatibility
+        # using @dev because PHPCompatibility ^9 does not yet have the 
+        # sniffers for 8.0+ but main branch does
+        uses: pantheon-systems/phpcompatibility-action@dev
+        with:
+          test-versions: 8.0-
