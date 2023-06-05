@@ -2,7 +2,7 @@ name: Draft Release PR
 on:
   workflow_run:
     workflows: [Lint and Test]
-    # branches: [main]
+    branches: [main]
     types:
       - completed
 jobs:
