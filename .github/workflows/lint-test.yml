@@ -1,7 +1,7 @@
 name: Lint and Test
 on: push
 jobs:
-  lint:
+  lint-test:
     runs-on: ubuntu-latest
     name: Lint & Test
     env:
