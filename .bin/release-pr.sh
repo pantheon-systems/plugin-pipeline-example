@@ -6,9 +6,12 @@ IFS=$'\n\t'
 readonly SELF_DIRNAME="$(dirname -- "$0")"
 readonly BASE_DIR="${SELF_DIRNAME}/.."
 
+# TODO: Parameterize or make case-insensitive when this is an action
+CANONICAL_FILE="README.MD"
+
 main() {
     local CANONICAL_VERSION_WITH_FLAG
-    CANONICAL_VERSION_WITH_FLAG="$(cat README.MD| grep 'Stable tag:' | awk '{print $3}')"
+    CANONICAL_VERSION_WITH_FLAG="$(grep 'Stable tag:' < "${CANONICAL_FILE}"  | awk '{print $3}')"
     local NEW_VERSION="${CANONICAL_VERSION_WITH_FLAG%-dev}"
     local RELEASE_BRANCH="release-${NEW_VERSION}"
     
