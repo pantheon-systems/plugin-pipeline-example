@@ -43,9 +43,8 @@ jobs:
       - name: WP.org Code Analysis
         run: |
           path=$(pwd)
-          ls $path
-          echo "WP.org Code Analysis is installed to /home/runner/work/plugin-pipeline-example/plugin-pipeline-example/wporg-code-analysis. cd'ing there..."
-          cd /home/runner/work/plugin-pipeline-example/plugin-pipeline-example/wporg-code-analysis
+          echo "WP.org Code Analysis is installed to ${path}/wporg-code-analysis. cd'ing there..."
+          cd ${path}/wporg-code-analysis
           echo "Setting up WP.org Code Analysis"
           composer install -n
           vendor/bin/phpcs -s -v --standard=MinimalPluginStandard --ignore=wporg-code-analysis/* --report=summary $path
