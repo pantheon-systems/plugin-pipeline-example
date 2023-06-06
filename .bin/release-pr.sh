@@ -14,7 +14,7 @@ main() {
     CANONICAL_VERSION_WITH_FLAG="$(grep 'Stable tag:' < "${CANONICAL_FILE}"  | awk '{print $3}')"
     local NEW_VERSION="${CANONICAL_VERSION_WITH_FLAG%-dev}"
     local RELEASE_BRANCH="release-${NEW_VERSION}"
-    
+
     # if local release branch exists, delete it
     if git show-ref --quiet --verify "refs/heads/$RELEASE_BRANCH"; then
         echo "> git branch -D ${RELEASE_BRANCH}"
@@ -33,7 +33,7 @@ main() {
                 continue
             fi
             # Use `sed` to perform the search and replace operation in each file
-            sed -i "" -e "s/${CANONICAL_VERSION_WITH_FLAG}/${NEW_VERSION}/g" "$file"
+            sed -i -e "s/${CANONICAL_VERSION_WITH_FLAG}/${NEW_VERSION}/g" "$file"
             if [[ "$file" == "$BASE_DIR/package.json" ]];then
                 # TODO: This seems unsafe as we might update dependencies as well.
                 #       Is it safe to just sed package-lock instead? That also seems wrong.
@@ -65,7 +65,7 @@ main() {
     if ! gh pr view "${RELEASE_BRANCH}"; then
         gh pr create --draft --base "release" \
             --title "${RELEASE_MESSAGE}" --body "${RELEASE_MESSAGE}." \
-            --label "automation" 
+            --label "automation"
     fi
 }
 
