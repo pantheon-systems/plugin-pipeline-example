@@ -32,9 +32,8 @@ main() {
                 echo "skipping sed of package lock"
                 continue
             fi
-            echo "running 'sed -i -e \"s/${CANONICAL_VERSION_WITH_FLAG}/${NEW_VERSION}/g\" \"$file\"'"
             # Use `sed` to perform the search and replace operation in each file
-            sed -i -e "s/${CANONICAL_VERSION_WITH_FLAG}/${NEW_VERSION}/g" "$file"
+            sed -i.tmp -e "s/${CANONICAL_VERSION_WITH_FLAG}/${NEW_VERSION}/g" "$file" && rm "$file.tmp"
             if [[ "$file" == "$BASE_DIR/package.json" ]];then
                 # TODO: This seems unsafe as we might update dependencies as well.
                 #       Is it safe to just sed package-lock instead? That also seems wrong.
@@ -50,9 +49,9 @@ main() {
                 shopt -s nocasematch # make the "if readme" case insensitive
                 if [[ "${file}" == "$BASE_DIR/readme.txt"  ]]; then
                     echo "README FOUND!"
-                    sed -i "" -e "s/= ${NEW_VERSION}/= ${NEW_VERSION} (${TODAYS_DATE})/g" "$file"
+                    sed -i -e "s/= ${NEW_VERSION}/= ${NEW_VERSION} (${TODAYS_DATE})/g" "$file"
                 elif [[ "${file}" == "$BASE_DIR/readme.md"  ]]; then
-                    sed -i "" -e "s/# ${NEW_VERSION}/# ${NEW_VERSION} (${TODAYS_DATE})/g" "$file"
+                    sed -i -e "s/# ${NEW_VERSION}/# ${NEW_VERSION} (${TODAYS_DATE})/g" "$file"
                 fi
             )
             git add "$file"
