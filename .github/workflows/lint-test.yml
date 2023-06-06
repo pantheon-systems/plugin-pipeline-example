@@ -46,7 +46,7 @@ jobs:
       - name: WP.org Code Analysis
         run: |
           path=$(pwd)
-          ls /home/runner/work/plugin-pipeline-example/
+          ls /home/runner/work/plugin-pipeline-example/plugin-pipeline-example
           echo "WP.org Code Analysis is installed to /home/runner/work/plugin-pipeline-example/plugin-pipeline-example/wporg-code-analysis. cd'ing there..."
           cd /home/runner/work/plugin-pipeline-example/plugin-pipeline-example/wporg-code-analysis
           echo "Setting up WP.org Code Analysis"
