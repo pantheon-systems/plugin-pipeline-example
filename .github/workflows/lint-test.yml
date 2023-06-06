@@ -47,6 +47,7 @@ jobs:
           path=$(pwd)
           ls $path
           ls ../
+          exit 1
           cd wporg-code-analysis
           echo "Setting up WP.org Code Analysis"
           composer install -n
