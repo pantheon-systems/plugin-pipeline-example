@@ -65,7 +65,9 @@ jobs:
           test-versions: 8.0-
   draft-release:
     name: Draft Release PR
-    needs: lint-test
+    needs:
+      - lint-test
+      - wporg-code-analysis
     # if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     env:
