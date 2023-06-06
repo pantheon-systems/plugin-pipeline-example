@@ -32,21 +32,18 @@ jobs:
     runs-on: ubuntu-latest
     name: WP.org Code Analysis
     steps:
+      - name: Checkout Plugin
+        uses: actions/checkout@v3
       - name: Checkout WP.org Code Analysis
         uses: actions/checkout@v3
         with:
           repository: WordPress/wporg-code-analysis
           ref: trunk
           path: wporg-code-analysis
-      - name: Checkout Plugin
-        uses: actions/checkout@v3
-        with:
-          repository: pantheon-systems/plugin-pipeline-example
-          ref: ${{ github.event.pull_request.head.sha }}
       - name: WP.org Code Analysis
         run: |
           path=$(pwd)
-          ls /home/runner/work/plugin-pipeline-example/plugin-pipeline-example
+          ls $path
           echo "WP.org Code Analysis is installed to /home/runner/work/plugin-pipeline-example/plugin-pipeline-example/wporg-code-analysis. cd'ing there..."
           cd /home/runner/work/plugin-pipeline-example/plugin-pipeline-example/wporg-code-analysis
           echo "Setting up WP.org Code Analysis"
