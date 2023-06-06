@@ -6,12 +6,15 @@ IFS=$'\n\t'
 readonly SELF_DIRNAME="$(dirname -- "$0")"
 readonly BASE_DIR="${SELF_DIRNAME}/.."
 
+# TODO: Parameterize or make case-insensitive when this is an action
+CANONICAL_FILE="README.MD"
+
 main() {
     local CANONICAL_VERSION_WITH_FLAG
-    CANONICAL_VERSION_WITH_FLAG="$(cat README.MD| grep 'Stable tag:' | awk '{print $3}')"
+    CANONICAL_VERSION_WITH_FLAG="$(grep 'Stable tag:' < "${CANONICAL_FILE}"  | awk '{print $3}')"
     local NEW_VERSION="${CANONICAL_VERSION_WITH_FLAG%-dev}"
     local RELEASE_BRANCH="release-${NEW_VERSION}"
-    
+
     # if local release branch exists, delete it
     if git show-ref --quiet --verify "refs/heads/$RELEASE_BRANCH"; then
         echo "> git branch -D ${RELEASE_BRANCH}"
@@ -30,7 +33,7 @@ main() {
                 continue
             fi
             # Use `sed` to perform the search and replace operation in each file
-            sed -i "" "s/${CANONICAL_VERSION_WITH_FLAG}/${NEW_VERSION}/g" "$file"
+            sed -i.tmp -e "s/${CANONICAL_VERSION_WITH_FLAG}/${NEW_VERSION}/g" "$file" && rm "$file.tmp"
             if [[ "$file" == "$BASE_DIR/package.json" ]];then
                 # TODO: This seems unsafe as we might update dependencies as well.
                 #       Is it safe to just sed package-lock instead? That also seems wrong.
@@ -46,14 +49,18 @@ main() {
                 shopt -s nocasematch # make the "if readme" case insensitive
                 if [[ "${file}" == "$BASE_DIR/readme.txt"  ]]; then
                     echo "README FOUND!"
-                    sed -i ""  "s/= ${NEW_VERSION}/= ${NEW_VERSION} (${TODAYS_DATE})/g" "$file"
+                    sed -i -e "s/= ${NEW_VERSION}/= ${NEW_VERSION} (${TODAYS_DATE})/g" "$file"
                 elif [[ "${file}" == "$BASE_DIR/readme.md"  ]]; then
-                    sed -i ""  "s/# ${NEW_VERSION}/# ${NEW_VERSION} (${TODAYS_DATE})/g" "$file"
+                    sed -i -e "s/# ${NEW_VERSION}/# ${NEW_VERSION} (${TODAYS_DATE})/g" "$file"
                 fi
             )
             git add "$file"
         fi
     done
+    # Who am I?
+    git config --global user.email "bot@getpantheon.com"
+    git config --global user.name "Pantheon Automation"
+
     RELEASE_MESSAGE="Release ${NEW_VERSION}"
     git commit -m "${RELEASE_MESSAGE}"
     git push origin "${RELEASE_BRANCH}" --force
@@ -62,7 +69,7 @@ main() {
     if ! gh pr view "${RELEASE_BRANCH}"; then
         gh pr create --draft --base "release" \
             --title "${RELEASE_MESSAGE}" --body "${RELEASE_MESSAGE}." \
-            --label "automation" 
+            --label "automation"
     fi
 }
 
