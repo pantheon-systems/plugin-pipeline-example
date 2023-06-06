@@ -32,6 +32,7 @@ main() {
                 echo "skipping sed of package lock"
                 continue
             fi
+            echo "running 'sed -i -e \"s/${CANONICAL_VERSION_WITH_FLAG}/${NEW_VERSION}/g\" \"$file\"'"
             # Use `sed` to perform the search and replace operation in each file
             sed -i -e "s/${CANONICAL_VERSION_WITH_FLAG}/${NEW_VERSION}/g" "$file"
             if [[ "$file" == "$BASE_DIR/package.json" ]];then
