@@ -43,6 +43,7 @@ jobs:
         with:
           repository: pantheon-systems/plugin-pipeline-example
           ref: $GITHUB_REF
+        run: ls $(pwd)
       - name: WP.org Code Analysis
         run: |
           path=$(pwd)
