@@ -57,6 +57,10 @@ main() {
             git add "$file"
         fi
     done
+    # Who am I?
+    git config --global user.email "bot@getpantheon.com"
+    git config --global user.name "Pantheon Automation"
+
     RELEASE_MESSAGE="Release ${NEW_VERSION}"
     git commit -m "${RELEASE_MESSAGE}"
     git push origin "${RELEASE_BRANCH}" --force
