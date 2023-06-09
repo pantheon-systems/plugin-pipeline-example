@@ -30,25 +30,13 @@ jobs:
         run: composer test
   wporg-code-analysis:
     runs-on: ubuntu-latest
-    name: WP.org Code Analysis
     steps:
-      - name: Checkout Plugin
-        uses: actions/checkout@v3
-      - name: Checkout WP.org Code Analysis
-        uses: actions/checkout@v3
-        with:
-          repository: WordPress/wporg-code-analysis
-          ref: trunk
-          path: wporg-code-analysis
       - name: WP.org Code Analysis
-        run: |
-          path=$(pwd)
-          echo "WP.org Code Analysis is installed to ${path}/wporg-code-analysis. cd'ing there..."
-          cd ${path}/wporg-code-analysis
-          echo "Setting up WP.org Code Analysis"
-          composer install -n
-          echo "Running WP.org Code Analysis"
-          vendor/bin/phpcs -s --standard=MinimalPluginStandard --ignore=wporg-code-analysis/* $path
+        uses: actions/checkout@v3
+      - name: WP.org Code Analysis
+        uses: pantheon-systems/action-wporg-validator@v1
+        with:
+          type: plugin
   phpcompatibility:
     runs-on: ubuntu-latest
     name: PHP Compatibility
