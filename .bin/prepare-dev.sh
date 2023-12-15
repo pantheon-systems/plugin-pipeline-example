@@ -14,6 +14,15 @@ readonly GIT_NAME="Pantheon Automation"
 readonly RELEASE_BRANCH="release"
 readonly DEVELOP_BRANCH="alt-main"
 
+new_dev_version_from_current(){
+    local CURRENT_VERSION="$1"
+    IFS='.' read -ra parts <<< "$CANONICAL_VERSION"
+    patch="${parts[2]}"
+    patch=$((patch + 1))
+    INCREMENTED="${parts[0]}.${parts[1]}.${patch}-dev"
+    echo "$INCREMENTED"
+}
+
 main() {
     local CANONICAL_VERSION
     CANONICAL_VERSION="$(grep 'Stable tag:' < "${CANONICAL_FILE}"  | awk '{print $3}')"
@@ -24,11 +33,8 @@ main() {
     git pull origin "${DEVELOP_BRANCH}"
     git rebase "${RELEASE_BRANCH}"
 
-    IFS='.' read -ra parts <<< "$CANONICAL_VERSION"
-    patch="${parts[2]}"
-    patch=$((patch + 1))
-    NEW_DEV_VERSION="${parts[0]}.${parts[1]}.$patch-dev"
-    echo "$NEW_DEV_VERSION"
+    local NEW_DEV_VERSION
+    NEW_DEV_VERSION=$(new_dev_version_from_current "$CANONICAL_VERSION")
 
     echo "Updating ${CANONICAL_VERSION} to ${NEW_DEV_VERSION}"
     # Iterate through each file in the top-level directory
@@ -72,8 +78,8 @@ main() {
         fi
     done
     # Who am I?
-    git config --global user.email "${GIT_USER}"
-    git config --global user.name "${GIT_NAME}"
+    git config user.email "${GIT_USER}"
+    git config user.name "${GIT_NAME}"
 
     git commit -m "Prepare ${NEW_DEV_VERSION}"
     # git push origin "${DEVELOP_BRANCH}"
