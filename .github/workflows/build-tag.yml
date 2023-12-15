@@ -35,3 +35,11 @@ jobs:
         git commit -m "Release $VERSION"
         git tag "$VERSION"
         git push --tags
+  prepare-dev:
+    name: Prepare next dev release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Update Development Branch
+        run: bash ./bin/prepare-dev.sh
