@@ -70,7 +70,7 @@ main() {
         local PR_TITLE="${RELEASE_MESSAGE}"
         local PR_BODY="${RELEASE_MESSAGE}. If CI tests have not run, close this PR and re-open it."
         gh pr create --draft --base "release" \
-            --title "${PR_TITLE}" --body "${RELEASE_BODY}" \
+            --title "${PR_TITLE}" --body "${PR_BODY}" \
             --label "automation"
     fi
 }
