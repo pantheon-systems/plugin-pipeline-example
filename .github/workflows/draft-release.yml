@@ -2,7 +2,7 @@ name: Draft Release PR
 on:
   push:
     branches:
-      - 'release'
+      - 'main'
 
 permissions:
   pull-requests: write
