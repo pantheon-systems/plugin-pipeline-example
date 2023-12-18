@@ -4,6 +4,10 @@ on:
     branches:
       - 'release'
 
+permissions:
+  pull-requests: write
+  contents: write
+
 jobs:
   tag:
     name: Tag with Assets
