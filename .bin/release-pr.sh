@@ -61,7 +61,7 @@ main() {
     git config user.email "bot@getpantheon.com"
     git config user.name "Pantheon Automation"
 
-    RELEASE_MESSAGE="Release ${NEW_VERSION}"
+    RELEASE_MESSAGE="Release ${NEW_VERSION}. If CI tests have not run, close this PR and re-open it."
     git commit -m "${RELEASE_MESSAGE}"
     git push origin "${RELEASE_BRANCH}" --force
 
