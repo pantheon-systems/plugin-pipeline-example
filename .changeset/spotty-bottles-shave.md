@@ -1,5 +1,5 @@
 ---
-"plugin-pipeline-example": patch
+"plugin-pipeline-example": major
 ---
 
-Patch example
+Introduced Counter. The Counter returns 0. [28](https://github.com/pantheon-systems/plugin-pipeline-example/pull/28)
