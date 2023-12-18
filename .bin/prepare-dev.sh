@@ -12,7 +12,7 @@ readonly GIT_USER="bot@getpantheon.com"
 readonly GIT_NAME="Pantheon Automation"
 
 readonly RELEASE_BRANCH="release"
-readonly DEVELOP_BRANCH="alt-main"
+readonly DEVELOP_BRANCH="main"
 
 new_dev_version_from_current(){
     local CURRENT_VERSION="$1"
