@@ -4,5 +4,7 @@
   "initialVersions": {
     "plugin-pipeline-example": "0.1.1-dev"
   },
-  "changesets": []
+  "changesets": [
+    "spotty-bottles-shave"
+  ]
 }
