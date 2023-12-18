@@ -61,14 +61,16 @@ main() {
     git config user.email "bot@getpantheon.com"
     git config user.name "Pantheon Automation"
 
-    RELEASE_MESSAGE="Release ${NEW_VERSION}. If CI tests have not run, close this PR and re-open it."
+    RELEASE_MESSAGE="Release ${NEW_VERSION}"
     git commit -m "${RELEASE_MESSAGE}"
     git push origin "${RELEASE_BRANCH}" --force
 
     # Create a draft PR
     if ! gh pr view "${RELEASE_BRANCH}"; then
+        local PR_TITLE="${RELEASE_MESSAGE}"
+        local PR_BODY="${RELEASE_MESSAGE}. If CI tests have not run, close this PR and re-open it."
         gh pr create --draft --base "release" \
-            --title "${RELEASE_MESSAGE}" --body "${RELEASE_MESSAGE}." \
+            --title "${PR_TITLE}" --body "${RELEASE_BODY}" \
             --label "automation"
     fi
 }
