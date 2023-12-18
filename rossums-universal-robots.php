@@ -13,12 +13,3 @@
  */
 
 // Your code starts here.
-/**
- * Returns an int. It's a feature.
- *
- * @return int An integer.
- * @since 0.1.1-dev
- */
-function rur_counter() {
-	return 0;
-}
