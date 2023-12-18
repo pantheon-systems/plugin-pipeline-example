@@ -46,4 +46,4 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Update Development Branch
-        run: bash ./bin/prepare-dev.sh
+        run: bash .bin/prepare-dev.sh
