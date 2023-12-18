@@ -1,5 +1,11 @@
 name: On Push
 on: push
+
+permissions:
+  pull-requests: write
+  contents: write
+
+
 jobs:
   lint-test:
     runs-on: ubuntu-latest
