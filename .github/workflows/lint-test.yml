@@ -1,5 +1,12 @@
-name: On Push
-on: push
+name: Lint and Test
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - ready_for_review
+
 jobs:
   lint-test:
     runs-on: ubuntu-latest
@@ -10,6 +17,8 @@ jobs:
       DB_HOST: localhost
     steps:
       - uses: actions/checkout@v3
+      - name: Run shell linter
+        run: make lint-shell
       - name: Install NPM & Composer dependencies
         run: |
           composer install
@@ -32,23 +41,12 @@ jobs:
     runs-on: ubuntu-latest
     name: WP.org Code Analysis
     steps:
-      - name: Checkout Plugin
-        uses: actions/checkout@v3
-      - name: Checkout WP.org Code Analysis
-        uses: actions/checkout@v3
-        with:
-          repository: WordPress/wporg-code-analysis
-          ref: trunk
-          path: wporg-code-analysis
       - name: WP.org Code Analysis
-        run: |
-          path=$(pwd)
-          echo "WP.org Code Analysis is installed to ${path}/wporg-code-analysis. cd'ing there..."
-          cd ${path}/wporg-code-analysis
-          echo "Setting up WP.org Code Analysis"
-          composer install -n
-          echo "Running WP.org Code Analysis"
-          vendor/bin/phpcs -s --standard=MinimalPluginStandard --ignore=wporg-code-analysis/* $path
+        uses: actions/checkout@v3
+      - name: WP.org Code Analysis
+        uses: pantheon-systems/action-wporg-validator@1.0.0
+        with:
+          type: plugin
   phpcompatibility:
     runs-on: ubuntu-latest
     name: PHP Compatibility
@@ -63,18 +61,12 @@ jobs:
         uses: pantheon-systems/phpcompatibility-action@dev
         with:
           test-versions: 8.0-
-  draft-release:
-    name: Draft Release PR
-    needs:
-      - lint-test
-      - wporg-code-analysis
-    if: github.ref == 'refs/heads/main'
+  validate-readme-spacing:
+    name: Validate README Spacing
     runs-on: ubuntu-latest
-    env:
-      GH_TOKEN: ${{ github.token }}
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    - name: Create or Update Release PR
-      run: |
-        bash .bin/release-pr.sh
+      - name: Checkout
+        uses: actions/checkout@v3
+      - uses: pantheon-systems/validate-readme-spacing@v1
+        with:
+          filepath: 'README.MD'

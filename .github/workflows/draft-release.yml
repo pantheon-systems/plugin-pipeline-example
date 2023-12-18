@@ -1,0 +1,22 @@
+name: Draft Release PR
+on:
+  push:
+    branches:
+      - 'main'
+
+permissions:
+  pull-requests: write
+  contents: write
+
+jobs:
+  draft-release:
+    name: Draft Release PR
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - name: Create or Update Release PR
+      run: |
+        bash .bin/release-pr.sh
