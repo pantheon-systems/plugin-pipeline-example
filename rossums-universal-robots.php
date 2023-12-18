@@ -12,7 +12,6 @@
  * @package         Rossums_Universal_Robots
  */
 
-// Your code starts here.
 /**
  * Returns an int. It's a feature.
  *
