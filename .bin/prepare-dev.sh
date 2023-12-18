@@ -82,7 +82,7 @@ main() {
     git config user.name "${GIT_NAME}"
 
     git commit -m "Prepare ${NEW_DEV_VERSION}"
-    # git push origin "${DEVELOP_BRANCH}"
+    git push origin "${DEVELOP_BRANCH}"
 }
 
 main "$@"
