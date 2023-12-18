@@ -1,10 +1,5 @@
-name: On Push
-on: push
-
-permissions:
-  pull-requests: write
-  contents: write
-
+name: Lint and Test
+on: pull_request
 
 jobs:
   lint-test:
@@ -60,18 +55,12 @@ jobs:
         uses: pantheon-systems/phpcompatibility-action@dev
         with:
           test-versions: 8.0-
-  draft-release:
-    name: Draft Release PR
-    needs:
-      - lint-test
-      - wporg-code-analysis
-    if: github.ref == 'refs/heads/main'
+  validate-readme-spacing:
+    name: Validate README Spacing
     runs-on: ubuntu-latest
-    env:
-      GH_TOKEN: ${{ github.token }}
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    - name: Create or Update Release PR
-      run: |
-        bash .bin/release-pr.sh
+      - name: Checkout
+        uses: actions/checkout@v3
+      - uses: pantheon-systems/validate-readme-spacing@v1
+        with:
+          filepath: 'README.MD'
