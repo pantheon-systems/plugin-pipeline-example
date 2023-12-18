@@ -16,7 +16,7 @@ readonly DEVELOP_BRANCH="alt-main"
 
 new_dev_version_from_current(){
     local CURRENT_VERSION="$1"
-    IFS='.' read -ra parts <<< "$CANONICAL_VERSION"
+    IFS='.' read -ra parts <<< "$CURRENT_VERSION"
     patch="${parts[2]}"
     patch=$((patch + 1))
     INCREMENTED="${parts[0]}.${parts[1]}.${patch}-dev"
@@ -64,6 +64,8 @@ main() {
                     continue
                 fi
             )
+
+            echo "search-and-replace with sed"
             # Use `sed` to perform the search and replace operation in each file
             sed -i.tmp -e "s/${CANONICAL_VERSION}/${NEW_DEV_VERSION}/g" "$file" && rm "$file.tmp"
             if [[ "$file" == "$BASE_DIR/package.json" ]];then
