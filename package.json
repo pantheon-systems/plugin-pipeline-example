@@ -1,6 +1,7 @@
 {
   "name": "plugin-pipeline-example",
   "version": "0.1.1-dev",
+  "private": true,
   "description": "A demo plugin to test and showcase github actions during plugin development and release",
   "main": "Gruntfile.js",
   "directories": {
@@ -10,7 +11,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "grunt build",
     "watch": "grunt watch",
-    "lint:js": "grunt jshint"
+    "lint:js": "grunt jshint",
+    "changeset": "npx changeset",
+    "version": "npx changeset version",
+    "publish": "npx changeset publish"
   },
   "repository": {
     "type": "git",
@@ -31,5 +35,8 @@
     "grunt-contrib-watch": "^1.1.0",
     "grunt-sass": "^3.1.0",
     "node-sass": "^9.0.0"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.27.1"
   }
 }
