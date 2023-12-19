@@ -35,24 +35,25 @@ process_file(){
         return
     fi
 
-    (
-        shopt -s nocasematch # make the "if readme" case insensitive
-        if [[ "${file}" == "$BASE_DIR/readme.txt"  ]]; then
-            echo "adding new heading"
-            new_heading="### ${NEW_DEV_VERSION}"
-            awk -v heading="$new_heading" '/## Changelog/ { print; print ""; print heading; print ""; next } 1' "$file" > tmp.md
-            mv tmp.md "$file"
-            git add "$file"
-            return
-        elif [[ "${file}" == "$BASE_DIR/readme.md"  ]]; then
-            echo "adding new heading"
-            new_heading="= ${NEW_DEV_VERSION} ="
-            awk -v heading="$new_heading" '/== Changelog ==/ { print; print ""; print heading; print ""; next } 1' "$file" > tmp.md
-            mv tmp.md "$file"
-            git add "$file"
-            return
+
+
+    shopt -s nocasematch # make the "if readme" case insensitive
+    local file_name=${file#"$BASE_DIR/"}
+    if [[ "$file_name" == "readme.txt" || "$file_name" == "readme.md"  ]]; then
+        echo "adding new heading"
+        if [[ "$file_name" == "readme.txt" ]]; then # there's gotta be a better way but whatever
+            local new_heading="### ${NEW_DEV_VERSION}"
+            local awk_with_target='/## Changelog/ { print; print ""; print heading; print ""; next } 1'
+        else
+            local new_heading="= ${NEW_DEV_VERSION} ="
+            local awk_with_target='/== Changelog ==/ { print; print ""; print heading; print ""; next } 1'
         fi
-    )
+        shopt -u nocasematch
+        awk -v heading="$new_heading" "$awk_with_target" "$file" > tmp.md
+        mv tmp.md "$file"
+        git add "$file"
+        return
+    fi
 
     echo "search-and-replace with sed"
     # Use `sed` to perform the search and replace operation in each file
