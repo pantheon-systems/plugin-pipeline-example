@@ -1,5 +1,6 @@
 #!/bin/bash
 set -eou pipefail
+set -x
 IFS=$'\n\t'
 
 if [[ "${DRY_RUN:-}" == 1 ]]; then
