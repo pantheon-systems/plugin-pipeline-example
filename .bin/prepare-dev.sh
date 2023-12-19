@@ -35,28 +35,7 @@ process_file(){
     fi
     echo "Checking file '${file}'..."
     if [[ "$file" == "$BASE_DIR/package-lock.json" ]];then
-        # skip package-lock and let `npm i` do it when package.json is processed.
         echo "package and package-lock will be handled later."
-        return
-    fi
-
-
-
-    shopt -s nocasematch # make the "if readme" case insensitive
-    local file_name=${file#"$BASE_DIR/"}
-    if [[ "$file_name" == "readme.txt" || "$file_name" == "readme.md"  ]]; then
-        echo "adding new heading"
-        if [[ "$file_name" == "readme.txt" ]]; then # there's gotta be a better way but whatever
-            local new_heading="### ${NEW_DEV_VERSION}"
-            local awk_with_target='/## Changelog/ { print; print ""; print heading; print ""; next } 1'
-        else
-            local new_heading="= ${NEW_DEV_VERSION} ="
-            local awk_with_target='/== Changelog ==/ { print; print ""; print heading; print ""; next } 1'
-        fi
-        shopt -u nocasematch
-        awk -v heading="$new_heading" "$awk_with_target" "$file" > tmp.md
-        mv tmp.md "$file"
-        git add "$file"
         return
     fi
 
@@ -69,6 +48,30 @@ process_file(){
 git_config(){
     git config user.email "${GIT_USER}"
     git config user.name "${GIT_NAME}"
+}
+
+update_readme(){
+    FILE_PATH="$1:-"
+    if [[ -z "${FILE_PATH}" ]]; then
+        echo "missing file path"
+        return 1
+    fi
+
+    local EXTENSION=${file#"$BASE_DIR/readme."}
+    
+    echo "adding new heading to readme.${EXTENSION}"
+
+    if [[ "$EXTENSION" == "md" ]]; then # there's gotta be a better way but whatever
+        local new_heading="### ${NEW_DEV_VERSION}"
+        local awk_with_target='/## Changelog/ { print; print ""; print heading; print ""; next } 1'
+    else
+        local new_heading="= ${NEW_DEV_VERSION} ="
+        local awk_with_target='/== Changelog ==/ { print; print ""; print heading; print ""; next } 1'
+    fi
+    awk -v heading="$new_heading" "$awk_with_target" "$FILE_PATH" > tmp.md
+    mv tmp.md "$file"
+
+    git add "$file"
 }
 
 main() {
@@ -100,6 +103,14 @@ main() {
     done
 
     git_config
+
+    shopt -s nocasematch # make the "if readme" case insensitive
+    for readme_extension in "txt" "md"; do
+        if [[ -f "${BASE_DIR}/readme.${readme_extension}" ]]; then
+            update_readme readme.${readme_extension}
+        fi
+    done
+    shopt -u nocasematch
 
     git commit -m "Prepare ${NEW_DEV_VERSION}"
 
