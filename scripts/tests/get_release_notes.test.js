@@ -1,35 +1,24 @@
 const test = require("node:test");
 const assert = require("node:assert");
 
-test("gets notes with date", () => {
-  process.argv[2] = "./scripts/tests/fixtures/with_date.md";
-  const expected = `* Set Counter to 1 [[34](https://github.com/pantheon-systems/plugin-pipeline-example/pull/34)]
-* Set Counter to 2 [[36](https://github.com/pantheon-systems/plugin-pipeline-example/pull/36)]`;
-  const actual = require("../get_release_notes");
-
-  assert(actual === expected);
-});
-test("gets notes with tag", () => {
-  process.argv[2] = "./scripts/tests/fixtures/with_tag.md";
-  const expected = `* Set Counter to 1 [[34](https://github.com/pantheon-systems/plugin-pipeline-example/pull/34)]
-* Set Counter to 2 [[36](https://github.com/pantheon-systems/plugin-pipeline-example/pull/36)]`;
-  const actual = require("../get_release_notes");
-
-  assert(actual === expected);
-});
-test("gets notes with date and tag", () => {
-  process.argv[2] = "./scripts/tests/fixtures/with_date_and_tag.md";
-  const expected = `* Set Counter to 1 [[34](https://github.com/pantheon-systems/plugin-pipeline-example/pull/34)]
-* Set Counter to 2 [[36](https://github.com/pantheon-systems/plugin-pipeline-example/pull/36)]`;
-  const actual = require("../get_release_notes");
-
-  assert(actual === expected);
-});
-test("gets notes with date and tag", () => {
-  process.argv[2] = "./scripts/tests/fixtures/with_date_and_tag.md";
-  const expected = `* Set Counter to 1 [[34](https://github.com/pantheon-systems/plugin-pipeline-example/pull/34)]
-* Set Counter to 2 [[36](https://github.com/pantheon-systems/plugin-pipeline-example/pull/36)]`;
-  const actual = require("../get_release_notes");
-
-  assert(actual === expected);
+[
+  {
+    name: "dev changelog",
+    path: "./scripts/tests/fixtures/dev.md",
+    expected: `* Set Counter to 1 [[34](https://github.com/pantheon-systems/plugin-pipeline-example/pull/34)]
+* Set Counter to 2 [[36](https://github.com/pantheon-systems/plugin-pipeline-example/pull/36)]`,
+  },
+  {
+    name: "release changelog",
+    path: "./scripts/tests/fixtures/release.md",
+    expected: `* Set Counter to 1 [[34](https://github.com/pantheon-systems/plugin-pipeline-example/pull/34)]
+* Set Counter to 2 [[36](https://github.com/pantheon-systems/plugin-pipeline-example/pull/36)]`,
+  },
+].map(({ name, path, expected }) => {
+  test(name, () => {
+    process.argv[2] = path;
+    const actual = require("../get_release_notes");
+    console.log(actual);
+    assert.equal(actual, expected);
+  });
 });

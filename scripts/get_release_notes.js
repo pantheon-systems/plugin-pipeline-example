@@ -12,13 +12,12 @@ module.exports = (() => {
   const filePath = resolve(__dirname, "..", path);
   const fileContent = readFileSync(filePath, "utf8");
   /**
-   * @see {@link https://regex101.com/r/RKaLGN/1} for the regex explanation
+   * @see {@link https://regex101.com/r/TmzSYI/1} for the regex explanation
    */
   const regex =
-    /(^#{3}\s[\s\d\.]+(\([\w\d\s]+\))?$\n(?<notes>^[\w\d\W][^#]{3,}$\n))/gm;
+    /(^#{3}\s[\s\d\.-\w]+(\([\w\d\s]+\)))?$\n(?<notes>^[\w\d\W][^#]{3,}$\n))/gm;
   const matches = fileContent.matchAll(regex);
-  const releaseNotes = [...matches][0][1].trim();
-  // const [releaseNotes] = [...matches].map((match) => match.groups.notes.trim());
+  const [releaseNotes] = [...matches].map((match) => match.groups.notes.trim());
   console.log(releaseNotes);
   return releaseNotes;
 })();
