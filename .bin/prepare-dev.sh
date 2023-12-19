@@ -34,7 +34,7 @@ process_file(){
         return
     fi
     echo "Checking file '${file}'..."
-    if [[ "$file" == "$BASE_DIR/package-lock.json" ]];then
+    if [[ "$file" == "$BASE_DIR/package-lock.json" || "$file" == "$BASE_DIR/package.json" ]];then
         echo "package and package-lock will be handled later."
         return
     fi
