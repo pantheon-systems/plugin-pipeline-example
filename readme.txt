@@ -69,6 +69,7 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 == Changelog ==
 
 = 0.1.3-dev =
+* Set Counter to 3 [[37](https://github.com/pantheon-systems/plugin-pipeline-example/pull/37)]
 
 = 0.1.2 (19 December 2023) =
 * Set Counter to 1 [[34](https://github.com/pantheon-systems/plugin-pipeline-example/pull/34)]
