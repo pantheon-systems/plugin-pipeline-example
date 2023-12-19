@@ -1,6 +1,6 @@
 #!/bin/bash
 set -eou pipefail
-
+set -x
 
 main(){
 	# shellcheck disable=SC2155
