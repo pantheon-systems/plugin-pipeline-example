@@ -2,7 +2,7 @@
 const { readFileSync } = require("fs");
 const { resolve } = require("path");
 
-const get_release_notes = (() => {
+module.exports = (() => {
   // get the args
   const [path] = process.argv.slice(2);
   // throw if necessary args are missing
@@ -17,8 +17,8 @@ const get_release_notes = (() => {
   const regex =
     /(^#{3}\s[\s\d\.]+(\([\w\d\s]+\))?$\n(?<notes>^[\w\d\W][^#]{3,}$\n))/gm;
   const matches = fileContent.matchAll(regex);
-  const [releaseNotes] = [...matches].map((match) => match.groups.notes.trim());
+  const releaseNotes = [...matches][0][1].trim();
+  // const [releaseNotes] = [...matches].map((match) => match.groups.notes.trim());
+  console.log(releaseNotes);
   return releaseNotes;
 })();
-
-module.exports = get_release_notes;
