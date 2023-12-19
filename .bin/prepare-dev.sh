@@ -78,7 +78,7 @@ main() {
     CANONICAL_VERSION="$(grep 'Stable tag:' < "${CANONICAL_FILE}"  | awk '{print $3}')"
     
     # fetch all tags and history:
-    if !git rev-parse --is-shallow-repository; then
+    if ! git rev-parse --is-shallow-repository; then
         git fetch --tags --unshallow --prune
     fi
 
