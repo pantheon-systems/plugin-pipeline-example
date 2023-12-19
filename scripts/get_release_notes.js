@@ -18,7 +18,7 @@ const get_release_notes = (() => {
     /(^#{3}\s[\s\d\.]+(\([\w\d\s]+\))?$\n(?<notes>^[\w\d\W][^#]{3,}$\n))/gm;
   const matches = fileContent.matchAll(regex);
   const [releaseNotes] = [...matches].map((match) => match.groups.notes.trim());
-  return releaseNotes
-})()
+  return releaseNotes;
+})();
 
 module.exports = get_release_notes;
