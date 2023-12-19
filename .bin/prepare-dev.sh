@@ -78,11 +78,11 @@ main() {
     CANONICAL_VERSION="$(grep 'Stable tag:' < "${CANONICAL_FILE}"  | awk '{print $3}')"
     
     # fetch all tags and history:
-    if ! git rev-parse --is-shallow-repository; then
+    if ! git rev-parse --is-shallow-repository > /dev/null; then
         git fetch --tags --unshallow --prune
     fi
 
-    if [ "$(git rev-parse --abbrev-ref HEAD)" != "main" ]; then
+    if ! git show-ref --quiet refs/heads/main && [[ "$(git rev-parse --abbrev-ref HEAD)" != "main" ]]; then
       git branch --track main origin/main
     fi
 
