@@ -209,7 +209,7 @@
                 "issues": "https://github.com/Behat/Gherkin/issues",
                 "source": "https://github.com/Behat/Gherkin/tree/v4.9.0"
             },
-            "time": "20.1.2-dev0-12T13:05:09+00:00"
+            "time": "20.1.20-12T13:05:09+00:00"
         },
         {
             "name": "behat/mink",
@@ -336,7 +336,7 @@
                 "issues": "https://github.com/minkphp/MinkBrowserKitDriver/issues",
                 "source": "https://github.com/minkphp/MinkBrowserKitDriver/tree/v1.4.1"
             },
-            "time": "20.1.2-dev2-10T14:17:06+00:00"
+            "time": "20.1.22-10T14:17:06+00:00"
         },
         {
             "name": "behat/mink-extension",
@@ -458,7 +458,7 @@
                 "source": "https://github.com/minkphp/MinkGoutteDriver/tree/v1.3.0"
             },
             "abandoned": "behat/mink-browserkit-driver",
-            "time": "20.1.2-dev0-12T11:35:46+00:00"
+            "time": "20.1.20-12T11:35:46+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -1864,7 +1864,7 @@
                     "type": "github"
                 }
             ],
-            "time": "20.1.2-dev2-02T12:48:52+00:00"
+            "time": "20.1.22-02T12:48:52+00:00"
         },
         {
             "name": "phpunit/php-invoker",
@@ -2196,7 +2196,7 @@
                 "issues": "https://github.com/php-fig/container/issues",
                 "source": "https://github.com/php-fig/container/tree/1.1.2"
             },
-            "time": "20.1.2-dev1-05T16:50:12+00:00"
+            "time": "20.1.21-05T16:50:12+00:00"
         },
         {
             "name": "psr/event-dispatcher",
