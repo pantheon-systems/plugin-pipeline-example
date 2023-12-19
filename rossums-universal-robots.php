@@ -19,5 +19,5 @@
  * @since 0.1.3-dev
  */
 function rur_counter() {
-	return 2;
+	return 3;
 }
