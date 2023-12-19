@@ -10,7 +10,7 @@ main(){
 	# Trap any exit and print the temporary workspace path back to the terminal
 	trap 'echo "
 
-	Working Directory: ${WP_WORKSPACE}"' EXIT
+	Working Directory: ${TEST_WORKSPACE}"' EXIT
 
 	local SELF_DIRNAME
 	SELF_DIRNAME="$(dirname -- "$0")"

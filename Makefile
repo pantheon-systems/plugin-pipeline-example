@@ -6,7 +6,7 @@ lint: lint-shell
 	composer lint
 
 test-prepare-dev:
-	bash test/test-prepare-dev.sh
+	bash tests/test-prepare-dev.sh
 
 test-pdev: test-prepare-dev
 
