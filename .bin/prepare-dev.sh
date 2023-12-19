@@ -40,7 +40,7 @@ process_file(){
     fi
 
     echo "search-and-replace with sed"
-    sed -i.tmp -e "s/${CANONICAL_VERSION}/${NEW_DEV_VERSION}/g" "$file" && rm "$file.tmp"
+    sed -i.tmp -e "/^\s*\* @since/!s/${CANONICAL_VERSION}/${NEW_DEV_VERSION}/g" "$file" && rm "$file.tmp"
 
     git add "$file"
 }
