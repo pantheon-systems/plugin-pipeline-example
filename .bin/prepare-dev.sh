@@ -33,9 +33,9 @@ process_file(){
         return
     fi
     echo "Checking file '${file}'..."
-    if [[ "$file" = "$BASE_DIR/package-lock.json" ]];then
+    if [[ "$file" == "$BASE_DIR/package-lock.json" ]];then
         # skip package-lock and let `npm i` do it when package.json is processed.
-        echo "skipping sed of package lock"
+        echo "package and package-lock will be handled later."
         return
     fi
 
@@ -60,17 +60,14 @@ process_file(){
     fi
 
     echo "search-and-replace with sed"
-    # Use `sed` to perform the search and replace operation in each file
     sed -i.tmp -e "s/${CANONICAL_VERSION}/${NEW_DEV_VERSION}/g" "$file" && rm "$file.tmp"
-    if [[ "$file" == "$BASE_DIR/package.json" ]];then
-        # TODO: This seems unsafe as we might update dependencies as well.
-        #       Is it safe to just sed package-lock instead? That also seems wrong.
-        echo "running 'npm i --package-lock-only' to update package-lock.json"
-        npm i --package-lock-only
-        git add "$BASE_DIR/package-lock.json"
-    fi
 
     git add "$file"
+}
+
+git_config(){
+    git config user.email "${GIT_USER}"
+    git config user.name "${GIT_NAME}"
 }
 
 main() {
@@ -100,11 +97,14 @@ main() {
     for file in "$BASE_DIR"/*; do
         process_file "$file"
     done
-    # Who am I?
-    git config user.email "${GIT_USER}"
-    git config user.name "${GIT_NAME}"
+
+    git_config
 
     git commit -m "Prepare ${NEW_DEV_VERSION}"
+
+    if [[ -f "$BASE_DIR/package.json" ]]; then
+        npm version "${NEW_DEV_VERSION}" --no-git-tag-version
+    fi
 
     if [[ "${DRY_RUN:-}" == 1 ]]; then
         return
