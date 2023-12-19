@@ -55,7 +55,7 @@ git_config(){
 }
 
 update_readme(){
-    FILE_PATH="$1:-"
+    FILE_PATH="${1:-}"
     if [[ -z "${FILE_PATH}" ]]; then
         echo "missing file path"
         return 1
