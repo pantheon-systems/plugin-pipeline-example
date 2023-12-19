@@ -21,7 +21,7 @@ const fileContent = readFileSync(filePath, "utf8");
  * would have the following match:
  * * Set Counter to 1 [20](https://github.com/pantheon-systems/plugin-pipeline-example/pull/20)
  */
-const regex = /(^#{3}\s[\s\d\.]+(\([\w\d\s]+\))?$\n(?<notes>^[\w\d\W][^#]+$\n))/gm
+const regex = /(^#{3}\s[\s\d\.]+(\([\w\d\s]+\))?$\n(?<notes>^[\w\d\W][^#]{3,}$\n))/gm
 const matches = fileContent.matchAll(regex);
 const [releaseNotes] = [...matches].map(match => match.groups.notes.trim());
 console.log(releaseNotes);
