@@ -38,6 +38,10 @@ process_file(){
         echo "package and package-lock will be handled later."
         return
     fi
+    if [[ "$file" == "$BASE_DIR/composer.json" || "$file" == "$BASE_DIR/composer-lock.json" ]];then
+        echo "skip composer."
+        return
+    fi
 
     echo "search-and-replace with sed"
     sed -i.tmp -e '/^\s*\* @since/!s/'"${CANONICAL_VERSION}"'/'"${NEW_DEV_VERSION}"'/g' "$file" && rm "$file.tmp"
