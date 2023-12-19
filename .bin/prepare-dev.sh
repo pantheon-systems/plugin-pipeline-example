@@ -2,6 +2,10 @@
 set -eou pipefail
 IFS=$'\n\t'
 
+if [[ "${DRY_RUN:-}" == 1 ]]; then
+    echo "Dry Run. Will not Push."
+fi
+
 # shellcheck disable=SC2155
 readonly SELF_DIRNAME="$(dirname -- "$0")"
 readonly BASE_DIR="${SELF_DIRNAME}/.."
@@ -99,6 +103,10 @@ main() {
     git config user.name "${GIT_NAME}"
 
     git commit -m "Prepare ${NEW_DEV_VERSION}"
+
+    if [[ "${DRY_RUN:-}" == 1 ]]; then
+        return
+    fi
     git push origin "${DEVELOP_BRANCH}"
 }
 
