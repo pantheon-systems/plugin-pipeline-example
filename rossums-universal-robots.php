@@ -19,7 +19,7 @@
  * @since 0.1.1
  */
 function rur_counter() {
-	return 4;
+	return 5;
 }
 
 /**

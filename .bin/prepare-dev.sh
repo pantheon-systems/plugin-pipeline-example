@@ -38,10 +38,19 @@ process_file(){
         echo "package and package-lock will be handled later."
         return
     fi
-    if [[ "$file" == "$BASE_DIR/composer.json" || "$file" == "$BASE_DIR/composer-lock.json" ]];then
+    if [[ "$file" == "$BASE_DIR/composer.json" || "$file" == "$BASE_DIR/composer.lock" ]];then
         echo "skip composer."
         return
     fi
+
+    shopt -s nocasematch # make the "if readme" case insensitive
+    for readme_extension in "txt" "md"; do
+        if [[ "$file" == "${BASE_DIR}/readme.${readme_extension}" ]]; then
+            echo "skip readmes"
+            continue
+        fi
+    done
+    shopt -u nocasematch
 
     echo "search-and-replace with sed"
     sed -i.tmp -e '/^\s*\* @since/!s/'"${CANONICAL_VERSION}"'/'"${NEW_DEV_VERSION}"'/g' "$file" && rm "$file.tmp"
@@ -61,7 +70,7 @@ update_readme(){
         return 1
     fi
 
-    local EXTENSION=${file#"$BASE_DIR/readme."}
+    local EXTENSION=${FILE_PATH#"$BASE_DIR/readme."}
     
     echo "adding new heading to readme.${EXTENSION}"
 
@@ -73,9 +82,11 @@ update_readme(){
         local awk_with_target='/== Changelog ==/ { print; print ""; print heading; print ""; next } 1'
     fi
     awk -v heading="$new_heading" "$awk_with_target" "$FILE_PATH" > tmp.md
-    mv tmp.md "$file"
+    mv tmp.md "$FILE_PATH"
 
-    git add "$file"
+    sed -i.tmp -e "s/Tested up to: ${CANONICAL_VERSION}/Tested up to: ${NEW_DEV_VERSION}/g" "$FILE_PATH" && rm "$FILE_PATH.tmp"
+
+    git add "$FILE_PATH"
 }
 
 main() {
