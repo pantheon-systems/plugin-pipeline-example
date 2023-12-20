@@ -15,42 +15,10 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
-    # TODO: In the future, with-node should be an optional param in the action.
-    - name: Build
-      run: |
-        npm ci
-        npm run build
-        composer install --no-dev -o
-    - name: Setup
-      run: |
-        VERSION=$(cat README.MD| grep 'Stable tag:' | awk '{print $3}')
-        [[ "$VERSION" != "" ]] || exit 1
-        echo "VERSION=$VERSION" >> $GITHUB_ENV
-
-    - name: Tag
-      run: |
-        echo "Releasing version $VERSION ..."
-        [[ "$VERSION" != "" ]] || exit 1
-        git config user.name Pantheon Automation
-        git config user.email bot@getpantheon.com
-        git checkout -b "robot-release-$VERSION"
-        git add -f assets/* # TODO: In the future, this should be keyed off of a parameter in the action that toggles whether we should build assets.
-        git add -f vendor/*
-        git commit -m "Release $VERSION"
-        git tag "$VERSION"
-        git push --tags
-    - name: Release
-      run: |
-        node ./scripts/get_release_notes.js ./README.MD >> ./release_notes.md
-        gh release create $VERSION --title "$VERSION" -F ./release_notes.md
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  prepare-dev:
-    name: Prepare next dev release
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Update Development Branch
-        run: bash .bin/prepare-dev.sh
+    - name: Build, tag, and release
+      uses: pantheon-systems/plugin-release-actions/build-tag-release@main
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        build_node_assets: "true"
+        build_composer_assets: "true"
+        draft: "false"
