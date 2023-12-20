@@ -18,7 +18,7 @@ jobs:
     - name: Build, tag, and release
       uses: pantheon-systems/plugin-release-actions/build-tag-release@main
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
+        gh_token: ${{ secrets.GITHUB_TOKEN }}
         build_node_assets: "true"
         build_composer_assets: "true"
         draft: "false"
