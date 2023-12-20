@@ -13,7 +13,7 @@ See the robots hard at work.
 
 ## Changelog
 
-### 0.1.2 (19 December 2023)
+### 0.1.2 (20 December 2023) (19 December 2023)
 * Set Counter to 1 [[34](https://github.com/pantheon-systems/plugin-pipeline-example/pull/34)]
 * Set Counter to 2 [[36](https://github.com/pantheon-systems/plugin-pipeline-example/pull/36)]
 
