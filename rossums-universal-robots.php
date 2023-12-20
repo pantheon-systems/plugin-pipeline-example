@@ -13,6 +13,13 @@
  */
 
 /**
+ * This plugin's latest version.
+ *
+ * @since 0.2.3-dev
+ */
+define( 'RUR_VERSION', '0.2.3-dev' );
+
+/**
  * Returns an int. It's a feature.
  *
  * @return int An integer.
@@ -29,5 +36,5 @@ function rur_counter() {
  * @since 0.2.0
  */
 function rur_another_counter() {
-	return 1;
+	return 2;
 }
