@@ -17,8 +17,8 @@ readonly GIT_USER="bot@getpantheon.com"
 # shellcheck disable=SC2034
 readonly GIT_NAME="Pantheon Automation"
 
-# shellcheck disable=SC2086,SC1091
-source $SELF_DIRNAME/src/functions.sh
+# shellcheck disable=SC1091
+source "${SELF_DIRNAME}/src/functions.sh"
 
 readonly RELEASE_BRANCH="release"
 readonly DEVELOP_BRANCH="main"
