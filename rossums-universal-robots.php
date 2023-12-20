@@ -7,7 +7,7 @@
  * Author URI:      pantheon.io
  * Text Domain:     rossums-universal-robots
  * Domain Path:     /languages
- * Version:         0.2.2
+ * Version:         0.2.3-dev
  *
  * @package         Rossums_Universal_Robots
  */
