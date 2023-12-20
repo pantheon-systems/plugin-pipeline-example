@@ -45,7 +45,7 @@ process_file(){
         return
     fi
     # Convert the filename to lowercase for case-insensitive comparison
-    LC_FILE_PATH=$(echo "$FILE_PATH" | tr '[:upper:]' '[:lower:]')
+    LC_FILE_PATH=$(echo "$FILE" | tr '[:upper:]' '[:lower:]')
 
     echo "Processing file '${FILE}'..."
     if [[ "$LC_FILE_PATH" == "$BASE_DIR/package-lock.json" || "$LC_FILE_PATH" == "$BASE_DIR/package.json" ]];then
