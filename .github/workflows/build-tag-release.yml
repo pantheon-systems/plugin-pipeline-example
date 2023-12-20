@@ -22,3 +22,11 @@ jobs:
         build_node_assets: "true"
         build_composer_assets: "true"
         draft: "false"
+  prepare_dev:
+    name: Update Dev environment for the next versions
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - name: Prepare Dev
+      uses: pantheon-systems/plugin-release-actions/prepare-dev@main
