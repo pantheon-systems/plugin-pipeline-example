@@ -17,6 +17,7 @@ See the robots hard at work.
 * [Build/Tag/Release](https://github.com/pantheon-systems/plugin-release-actions/)
 * [Prepare Dev](https://github.com/pantheon-systems/plugin-release-actions/)
 * [Release to WordPress.org](https://github.com/10up/action-wordpress-plugin-deploy) (10up)
+* Prepare Release PR
 
 ### Linting and Testing
 * [WordPress.org Code Analysis](https://github.com/pantheon-systems/action-wporg-validator/)
@@ -26,6 +27,7 @@ See the robots hard at work.
 ## Changelog
 
 ### 0.3.4-dev
+* Set Counter to 9 [[#](https://github.com/pantheon-systems/plugin-pipeline-example/pull/#)]
 
 ### 0.3.3 (20 December 2023)
 * Set Counter to 8 [[55](https://github.com/pantheon-systems/plugin-pipeline-example/pull/55)]
