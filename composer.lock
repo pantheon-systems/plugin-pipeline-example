@@ -59,7 +59,7 @@
                 "source": "https://github.com/Automattic/VIP-Coding-Standards",
                 "wiki": "https://github.com/Automattic/VIP-Coding-Standards/wiki"
             },
-            "time": "2023-09-05T11:01:05+00:00"
+            "time": "20.3.09-05T11:01:05+00:00"
         },
         {
             "name": "behat/behat",
@@ -146,7 +146,7 @@
                 "issues": "https://github.com/Behat/Behat/issues",
                 "source": "https://github.com/Behat/Behat/tree/v3.13.0"
             },
-            "time": "2023-04-18T15:40:53+00:00"
+            "time": "20.3.04-18T15:40:53+00:00"
         },
         {
             "name": "behat/gherkin",
@@ -588,7 +588,7 @@
                 "issues": "https://github.com/PHPCSStandards/composer-installer/issues",
                 "source": "https://github.com/PHPCSStandards/composer-installer"
             },
-            "time": "2023-01-05T11:28:13+00:00"
+            "time": "20.3.01-05T11:28:13+00:00"
         },
         {
             "name": "doctrine/instantiator",
@@ -774,7 +774,7 @@
                 "issues": "https://github.com/php-fig-rectified/psr2r-sniffer/issues",
                 "source": "https://github.com/php-fig-rectified/psr2r-sniffer/tree/1.5.1"
             },
-            "time": "2023-09-23T19:16:19+00:00"
+            "time": "20.3.09-23T19:16:19+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -968,7 +968,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-05-21T12:31:43+00:00"
+            "time": "20.3.05-21T12:31:43+00:00"
         },
         {
             "name": "guzzlehttp/psr7",
@@ -1073,7 +1073,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-04-17T16:00:37+00:00"
+            "time": "20.3.04-17T16:00:37+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -1132,7 +1132,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-03-08T13:26:56+00:00"
+            "time": "20.3.03-08T13:26:56+00:00"
         },
         {
             "name": "nikic/php-parser",
@@ -1223,7 +1223,7 @@
                     "email": "noreply@pantheon.io"
                 }
             ],
-            "time": "2023-08-11T17:05:44+00:00"
+            "time": "20.3.08-11T17:05:44+00:00"
         },
         {
             "name": "pantheon-systems/pantheon-wp-coding-standards",
@@ -1841,7 +1841,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-09-19T04:57:46+00:00"
+            "time": "20.3.09-19T04:57:46+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -2336,7 +2336,7 @@
             "support": {
                 "source": "https://github.com/php-fig/http-message/tree/1.1"
             },
-            "time": "2023-04-04T09:50:52+00:00"
+            "time": "20.3.04-04T09:50:52+00:00"
         },
         {
             "name": "ralouphie/getallheaders",
@@ -2744,7 +2744,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-05-07T05:35:17+00:00"
+            "time": "20.3.05-07T05:35:17+00:00"
         },
         {
             "name": "sebastian/environment",
@@ -2807,7 +2807,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-02-03T06:03:51+00:00"
+            "time": "20.3.02-03T06:03:51+00:00"
         },
         {
             "name": "sebastian/exporter",
@@ -2948,7 +2948,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-08-02T09:26:13+00:00"
+            "time": "20.3.08-02T09:26:13+00:00"
         },
         {
             "name": "sebastian/lines-of-code",
@@ -3180,7 +3180,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-02-03T06:07:39+00:00"
+            "time": "20.3.02-03T06:07:39+00:00"
         },
         {
             "name": "sebastian/resource-operations",
@@ -3291,7 +3291,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-02-03T06:13:03+00:00"
+            "time": "20.3.02-03T06:13:03+00:00"
         },
         {
             "name": "sebastian/version",
@@ -3402,7 +3402,7 @@
                 "source": "https://github.com/sirbrillig/phpcs-variable-analysis",
                 "wiki": "https://github.com/sirbrillig/phpcs-variable-analysis/wiki"
             },
-            "time": "2023-08-05T23:46:11+00:00"
+            "time": "20.3.08-05T23:46:11+00:00"
         },
         {
             "name": "slevomat/coding-standard",
@@ -3920,7 +3920,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-07-07T06:10:25+00:00"
+            "time": "20.3.07-07T06:10:25+00:00"
         },
         {
             "name": "symfony/dependency-injection",
@@ -4073,7 +4073,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-05-23T14:45:45+00:00"
+            "time": "20.3.05-23T14:45:45+00:00"
         },
         {
             "name": "symfony/dom-crawler",
@@ -4232,7 +4232,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-07-06T06:34:20+00:00"
+            "time": "20.3.07-06T06:34:20+00:00"
         },
         {
             "name": "symfony/event-dispatcher-contracts",
@@ -4308,7 +4308,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-05-23T14:45:45+00:00"
+            "time": "20.3.05-23T14:45:45+00:00"
         },
         {
             "name": "symfony/filesystem",
@@ -4372,7 +4372,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-05-31T13:04:02+00:00"
+            "time": "20.3.05-31T13:04:02+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -4454,7 +4454,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-26T09:26:14+00:00"
+            "time": "20.3.01-26T09:26:14+00:00"
         },
         {
             "name": "symfony/polyfill-intl-grapheme",
@@ -4535,7 +4535,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-26T09:26:14+00:00"
+            "time": "20.3.01-26T09:26:14+00:00"
         },
         {
             "name": "symfony/polyfill-intl-idn",
@@ -4622,7 +4622,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-26T09:30:37+00:00"
+            "time": "20.3.01-26T09:30:37+00:00"
         },
         {
             "name": "symfony/polyfill-intl-normalizer",
@@ -4706,7 +4706,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-26T09:26:14+00:00"
+            "time": "20.3.01-26T09:26:14+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -4789,7 +4789,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-07-28T09:04:16+00:00"
+            "time": "20.3.07-28T09:04:16+00:00"
         },
         {
             "name": "symfony/polyfill-php72",
@@ -4865,7 +4865,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-26T09:26:14+00:00"
+            "time": "20.3.01-26T09:26:14+00:00"
         },
         {
             "name": "symfony/polyfill-php73",
@@ -4944,7 +4944,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-26T09:26:14+00:00"
+            "time": "20.3.01-26T09:26:14+00:00"
         },
         {
             "name": "symfony/polyfill-php80",
@@ -5027,7 +5027,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-26T09:26:14+00:00"
+            "time": "20.3.01-26T09:26:14+00:00"
         },
         {
             "name": "symfony/polyfill-php81",
@@ -5106,7 +5106,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-26T09:26:14+00:00"
+            "time": "20.3.01-26T09:26:14+00:00"
         },
         {
             "name": "symfony/service-contracts",
@@ -5630,7 +5630,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2023-09-14T07:06:09+00:00"
+            "time": "20.3.09-14T07:06:09+00:00"
         },
         {
             "name": "yoast/phpunit-polyfills",
@@ -5690,7 +5690,7 @@
                 "issues": "https://github.com/Yoast/PHPUnit-Polyfills/issues",
                 "source": "https://github.com/Yoast/PHPUnit-Polyfills"
             },
-            "time": "2023-08-19T14:25:08+00:00"
+            "time": "20.3.08-19T14:25:08+00:00"
         }
     ],
     "aliases": [],
