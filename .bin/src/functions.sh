@@ -84,17 +84,17 @@ update_readme(){
     if [[ "$LC_FILE_PATH" == *.md ]]; then
         echo_info "markdown search-replace"
         local new_heading="### ${NEW_VERSION}"
-        local awk_with_target='/## Changelog/ { print; print ""; print heading; print ""; next } 1'
+        local awk_with_target='/## Changelog/ { print; print ""; print heading; next } 1'
     else
         echo_info "wp.org txt search-replace"
         local new_heading="= ${NEW_VERSION} ="
-        local awk_with_target='/== Changelog ==/ { print; print ""; print heading; print ""; next } 1'
+        local awk_with_target='/== Changelog ==/ { print; print ""; print heading; next } 1'
     fi
 
     awk -v heading="$new_heading" "$awk_with_target" "$FILE_PATH" > tmp.md
     mv tmp.md "$FILE_PATH"
 
-    sed -i.tmp -e "s/Tested up to: ${OLD_VERSION}/Tested up to: ${NEW_VERSION}/g" "$FILE_PATH" && rm "$FILE_PATH.tmp"
+    sed -i.tmp -e "s/Stable tag: ${OLD_VERSION}/Stable tag: ${NEW_VERSION}/g" "$FILE_PATH" && rm "$FILE_PATH.tmp"
 
     git add "$FILE_PATH"
 }
