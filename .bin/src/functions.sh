@@ -94,7 +94,7 @@ update_readme(){
     awk -v heading="$new_heading" "$awk_with_target" "$FILE_PATH" > tmp.md
     mv tmp.md "$FILE_PATH"
 
-    sed -i.tmp -e "s/Tested up to: ${OLD_VERSION}/Tested up to: ${NEW_VERSION}/g" "$FILE_PATH" && rm "$FILE_PATH.tmp"
+    sed -i.tmp -e "s/Stable tag: ${OLD_VERSION}/Stable tag: ${NEW_VERSION}/g" "$FILE_PATH" && rm "$FILE_PATH.tmp"
 
     git add "$FILE_PATH"
 }
