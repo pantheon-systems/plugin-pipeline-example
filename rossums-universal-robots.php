@@ -7,7 +7,7 @@
  * Author URI:      pantheon.io
  * Text Domain:     rossums-universal-robots
  * Domain Path:     /languages
- * Version:         0.3.1-dev
+ * Version:         0.3.1
  *
  * @package         Rossums_Universal_Robots
  */
@@ -17,7 +17,7 @@
  *
  * @since 0.3.0
  */
-define( 'RUR_VERSION', '0.3.1-dev' );
+define( 'RUR_VERSION', '0.3.1' );
 
 /**
  * Returns an int. It's a feature.

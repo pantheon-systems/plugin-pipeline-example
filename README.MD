@@ -5,7 +5,7 @@ Tags: comments, spam
 Requires at least: 4.5  
 Tested up to: 6.2.1  
 Requires PHP: 5.6  
-Stable tag: 0.3.1-dev  
+Stable tag: 0.3.1  
 License: GPLv2 or later  
 License URI: https://www.gnu.org/licenses/gpl-2.0.html 
 
@@ -13,7 +13,7 @@ See the robots hard at work.
 
 ## Changelog
 
-### 0.3.1-dev
+### 0.3.1 (20 December 2023)
 * Set Counter to 6 [[49](https://github.com/pantheon-systems/plugin-pipeline-example/pull/49)]
 
 ### 0.3.0 (20 December 2023)
