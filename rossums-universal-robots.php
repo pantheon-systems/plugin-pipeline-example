@@ -7,10 +7,17 @@
  * Author URI:      pantheon.io
  * Text Domain:     rossums-universal-robots
  * Domain Path:     /languages
- * Version:         0.2.3-dev
+ * Version:         0.3.0-dev
  *
  * @package         Rossums_Universal_Robots
  */
+
+/**
+ * This plugin's latest version.
+ *
+ * @since 0.3.0-dev
+ */
+define( 'RUR_VERSION', '0.3.0-dev' );
 
 /**
  * Returns an int. It's a feature.
@@ -29,5 +36,5 @@ function rur_counter() {
  * @since 0.2.0
  */
 function rur_another_counter() {
-	return 1;
+	return 2;
 }
