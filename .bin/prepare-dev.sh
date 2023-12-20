@@ -23,39 +23,6 @@ source "${SELF_DIRNAME}/src/functions.sh"
 readonly RELEASE_BRANCH="release"
 readonly DEVELOP_BRANCH="main"
 
-process_file(){
-    local FILE="${1:-}"
-    local OLD_VERSION="${2:-}"
-    local NEW_VERSION="${3:-}"
-    if [[ -z "${FILE}" ]] || [[ ! -f "$FILE" ]]; then
-        echo_info "No File '${FILE}'"
-        return
-    fi
-    # Convert the filename to lowercase for case-insensitive comparison
-    LC_FILE_PATH=$(echo "$FILE_PATH" | tr '[:upper:]' '[:lower:]')
-
-    echo "Processing file '${FILE}'..."
-    if [[ "$LC_FILE_PATH" == "$BASE_DIR/package-lock.json" || "$LC_FILE_PATH" == "$BASE_DIR/package.json" ]];then
-        echo_info "package and package-lock will be handled later [${FILE}]."
-        return
-    fi
-    if [[ "$LC_FILE_PATH" == "$BASE_DIR/composer.json" || "$LC_FILE_PATH" == "$BASE_DIR/composer.lock" ]];then
-        echo_info "skip composer [${FILE}]."
-        return
-    fi
-    if [[ "$LC_FILE_PATH" == *readme.* ]]; then
-        echo_info "Alternative readme Processing  [${FILE}]."
-        update_readme "${BASE_DIR}/${readme}" "${OLD_VERSION}" "${NEW_VERSION}"
-        echo_info "Skip futher readme sed"
-        return
-    fi
-
-    echo "search-and-replace with sed"
-    sed -i.tmp -e '/^\s*\* @since/!s/'"${OLD_VERSION}"'/'"${NEW_VERSION}"'/g' "$FILE" && rm "$FILE.tmp"
-
-    git add "$FILE"
-}
-
 main() {
     local README_MD="${1:-}"
     if [[ -z "$README_MD" ]]; then
