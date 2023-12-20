@@ -7,7 +7,7 @@
  * Author URI:      pantheon.io
  * Text Domain:     rossums-universal-robots
  * Domain Path:     /languages
- * Version:         0.2.0
+ * Version:         0.2.1
  *
  * @package         Rossums_Universal_Robots
  */
@@ -19,7 +19,7 @@
  * @since 0.1.1
  */
 function rur_counter() {
-	return 4;
+	return 5;
 }
 
 /**
