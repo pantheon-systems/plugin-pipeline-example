@@ -70,7 +70,7 @@ update_readme(){
         return 1
     fi
 
-    local EXTENSION=${file#"$BASE_DIR/readme."}
+    local EXTENSION=${FILE_PATH#"$BASE_DIR/readme."}
     
     echo "adding new heading to readme.${EXTENSION}"
 
@@ -82,11 +82,11 @@ update_readme(){
         local awk_with_target='/== Changelog ==/ { print; print ""; print heading; print ""; next } 1'
     fi
     awk -v heading="$new_heading" "$awk_with_target" "$FILE_PATH" > tmp.md
-    mv tmp.md "$file"
+    mv tmp.md "$FILE_PATH"
 
-    sed -i.tmp -e "s/Tested up to: ${CANONICAL_VERSION}/Tested up to: ${NEW_DEV_VERSION}/g" "$file" && rm "$file.tmp"
+    sed -i.tmp -e "s/Tested up to: ${CANONICAL_VERSION}/Tested up to: ${NEW_DEV_VERSION}/g" "$FILE_PATH" && rm "$FILE_PATH.tmp"
 
-    git add "$file"
+    git add "$FILE_PATH"
 }
 
 main() {
