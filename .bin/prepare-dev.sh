@@ -31,24 +31,24 @@ process_file(){
         echo_info "No File '${FILE}'"
         return
     fi
-    echo "Checking file '${FILE}'..."
-    if [[ "$FILE" == "$BASE_DIR/package-lock.json" || "$FILE" == "$BASE_DIR/package.json" ]];then
-        echo_info "package and package-lock will be handled later."
-        return
-    fi
-    if [[ "$FILE" == "$BASE_DIR/composer.json" || "$FILE" == "$BASE_DIR/composer.lock" ]];then
-        echo_info "skip composer."
-        return
-    fi
+    # Convert the filename to lowercase for case-insensitive comparison
+    LC_FILE_PATH=$(echo "$FILE_PATH" | tr '[:upper:]' '[:lower:]')
 
-    shopt -s nocasematch # make the "if readme" case insensitive
-    for readme_extension in "txt" "md"; do
-        if [[ "$file" == "${BASE_DIR}/readme.${readme_extension}" ]]; then
-            echo_info "skipping readme"
-            continue
-        fi
-    done
-    shopt -u nocasematch
+    echo "Processing file '${FILE}'..."
+    if [[ "$LC_FILE_PATH" == "$BASE_DIR/package-lock.json" || "$LC_FILE_PATH" == "$BASE_DIR/package.json" ]];then
+        echo_info "package and package-lock will be handled later [${FILE}]."
+        return
+    fi
+    if [[ "$LC_FILE_PATH" == "$BASE_DIR/composer.json" || "$LC_FILE_PATH" == "$BASE_DIR/composer.lock" ]];then
+        echo_info "skip composer [${FILE}]."
+        return
+    fi
+    if [[ "$LC_FILE_PATH" == *readme.* ]]; then
+        echo_info "Alternative readme Processing  [${FILE}]."
+        update_readme "${BASE_DIR}/${readme}" "${OLD_VERSION}" "${NEW_VERSION}"
+        echo_info "Skip futher readme sed"
+        return
+    fi
 
     echo "search-and-replace with sed"
     sed -i.tmp -e '/^\s*\* @since/!s/'"${OLD_VERSION}"'/'"${NEW_VERSION}"'/g' "$FILE" && rm "$FILE.tmp"
@@ -86,20 +86,10 @@ main() {
     echo "Updating ${CURRENT_VERSION} to ${NEW_DEV_VERSION}"
     # Iterate through each file in the top-level directory
     for file in "$BASE_DIR"/*; do
-        if [[ "$file" == "$README_MD" || "$file" == "$README_TXT" ]]; then
-            echo_info "Don't process readme [${file}]."
-            continue
-        fi
         process_file "$file" "${CURRENT_VERSION}" "${NEW_DEV_VERSION}"
     done
 
     git_config
-
-    for readme in "$README_MD" "$README_TXT"; do
-        if [[ -f "${BASE_DIR}/${readme}" ]]; then
-            update_readme "${BASE_DIR}/${readme}" "${CURRENT_VERSION}" "${NEW_DEV_VERSION}"
-        fi
-    done
 
     git commit -m "Prepare ${NEW_DEV_VERSION}"
 

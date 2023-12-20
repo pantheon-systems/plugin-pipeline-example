@@ -43,12 +43,11 @@ update_readme(){
         echo_error "usage: update_readme FILE_PATH OLD_VERSION NEW_VERSION"
         return 1
     fi
-
-    local EXTENSION=${FILE_PATH#"$BASE_DIR/readme."}
     
-    echo_info "adding new heading to readme.${EXTENSION}"
-    shopt -s nocasematch # make the "if" case insensitive
-    if [[ "$EXTENSION" == "md" ]]; then # there's gotta be a better way but whatever
+    # Convert the filename to lowercase for case-insensitive comparison
+    LC_FILE_PATH=$(echo "$FILE_PATH" | tr '[:upper:]' '[:lower:]')
+
+    if [[ "$LC_FILE_PATH" == *.md ]]; then
         echo_info "markdown search-replace"
         local new_heading="### ${NEW_VERSION}"
         local awk_with_target='/## Changelog/ { print; print ""; print heading; print ""; next } 1'
@@ -57,7 +56,6 @@ update_readme(){
         local new_heading="= ${NEW_VERSION} ="
         local awk_with_target='/== Changelog ==/ { print; print ""; print heading; print ""; next } 1'
     fi
-    shopt -u nocasematch
 
     awk -v heading="$new_heading" "$awk_with_target" "$FILE_PATH" > tmp.md
     mv tmp.md "$FILE_PATH"
