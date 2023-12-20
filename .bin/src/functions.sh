@@ -58,7 +58,7 @@ process_file(){
     fi
     if [[ "$LC_FILE_PATH" == *readme.* ]]; then
         echo_info "Alternative readme Processing  [${FILE}]."
-        update_readme "${BASE_DIR}/${readme}" "${OLD_VERSION}" "${NEW_VERSION}"
+        update_readme ${FILE} "${OLD_VERSION}" "${NEW_VERSION}"
         echo_info "Skip futher readme sed"
         return
     fi
