@@ -5,7 +5,7 @@ Tags: comments, spam
 Requires at least: 4.5
 Tested up to: 6.2.1
 Requires PHP: 5.6
-Stable tag: 0.3.2
+Stable tag: 0.3.3-dev
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -67,6 +67,8 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 2. This is the second screen shot
 
 == Changelog ==
+
+= 0.3.3-dev =
 
 = 0.3.2 (20 December 2023) =
 * Set Counter to 7 [[52](https://github.com/pantheon-systems/plugin-pipeline-example/pull/52)]
