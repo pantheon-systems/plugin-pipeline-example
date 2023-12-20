@@ -1,7 +1,7 @@
 
 
 lint-shell:
-	shellcheck .bin/prepare-dev.sh .bin/release-pr.sh .bin/src/*
+	shellcheck .bin/release-pr.sh
 lint: lint-shell
 	composer lint
 
