@@ -36,5 +36,5 @@ function rur_counter() {
  * @since 0.2.0
  */
 function rur_another_counter() {
-	return 3;
+	return 4;
 }
