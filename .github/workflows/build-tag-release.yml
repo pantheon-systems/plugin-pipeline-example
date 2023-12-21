@@ -21,7 +21,6 @@ jobs:
         gh_token: ${{ secrets.GITHUB_TOKEN }}
         build_node_assets: "true"
         build_composer_assets: "true"
-        draft: "false"
   prepare_dev:
     name: Update Dev environment for the next versions
     runs-on: ubuntu-latest
