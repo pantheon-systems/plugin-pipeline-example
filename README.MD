@@ -14,10 +14,10 @@ See the robots hard at work.
 ## Actions Used
 
 ### Development Workflow
+* [Prepare Release PR](https://github.com/pantheon-systems/plugin-release-actions/)
 * [Build/Tag/Release](https://github.com/pantheon-systems/plugin-release-actions/)
 * [Prepare Dev](https://github.com/pantheon-systems/plugin-release-actions/)
 * [Release to WordPress.org](https://github.com/10up/action-wordpress-plugin-deploy) (10up)
-* Prepare Release PR
 
 ### Linting and Testing
 * [WordPress.org Code Analysis](https://github.com/pantheon-systems/action-wporg-validator/)
