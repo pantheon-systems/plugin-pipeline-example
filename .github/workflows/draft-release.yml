@@ -12,11 +12,9 @@ jobs:
   draft-release:
     name: Draft Release PR
     runs-on: ubuntu-latest
-    env:
-      GH_TOKEN: ${{ github.token }}
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    - name: Create or Update Release PR
-      run: |
-        bash .bin/release-pr.sh
+    - uses: actions/checkout@v3
+    - name: Draft Release PR
+      uses: pantheon-systems/plugin-release-actions/release-pr@v0
+      with:
+        gh_token: ${{ secrets.GITHUB_TOKEN }}

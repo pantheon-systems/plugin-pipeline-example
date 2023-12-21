@@ -1,8 +1,4 @@
-
-
-lint-shell:
-	shellcheck .bin/release-pr.sh
-lint: lint-shell
+lint:
 	composer lint
 
 test:
