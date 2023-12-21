@@ -26,7 +26,7 @@ define( 'RUR_VERSION', '0.3.8-dev' );
  * @since 0.1.1
  */
 function rur_counter() {
-	return 12;
+	return 13;
 }
 
 /**
