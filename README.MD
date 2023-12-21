@@ -14,10 +14,10 @@ See the robots hard at work.
 ## Actions Used
 
 ### Development Workflow
+* [Prepare Release PR](https://github.com/pantheon-systems/plugin-release-actions/)
 * [Build/Tag/Release](https://github.com/pantheon-systems/plugin-release-actions/)
 * [Prepare Dev](https://github.com/pantheon-systems/plugin-release-actions/)
 * [Release to WordPress.org](https://github.com/10up/action-wordpress-plugin-deploy) (10up)
-* Prepare Release PR
 
 ### Linting and Testing
 * [WordPress.org Code Analysis](https://github.com/pantheon-systems/action-wporg-validator/)
@@ -27,6 +27,7 @@ See the robots hard at work.
 ## Changelog
 
 ### 0.3.8-dev
+* Set Counter to 13 [[67](https://github.com/pantheon-systems/plugin-pipeline-example/pull/67)]
 
 ### 0.3.7 (21 December 2023)
 * Update the Second Counter to 4 [[64](https://github.com/pantheon-systems/plugin-pipeline-example/pull/64)]

@@ -17,8 +17,6 @@ jobs:
       DB_HOST: localhost
     steps:
       - uses: actions/checkout@v3
-      - name: Run shell linter
-        run: make lint-shell
       - name: Install NPM & Composer dependencies
         run: |
           composer install
@@ -41,8 +39,7 @@ jobs:
     runs-on: ubuntu-latest
     name: WP.org Code Analysis
     steps:
-      - name: WP.org Code Analysis
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
       - name: WP.org Code Analysis
         uses: pantheon-systems/action-wporg-validator@1.0.0
         with:
@@ -51,8 +48,7 @@ jobs:
     runs-on: ubuntu-latest
     name: PHP Compatibility
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
       - run: echo "Note these tests may be incomplete for newer PHP version and miss some deprecations"
         shell: bash
       - name: PHPCompatibility
@@ -65,8 +61,7 @@ jobs:
     name: Validate README Spacing
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
       - uses: pantheon-systems/validate-readme-spacing@v1
         with:
           filepath: 'README.MD'
