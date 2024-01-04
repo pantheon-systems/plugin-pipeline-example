@@ -27,6 +27,7 @@ See the robots hard at work.
 ## Changelog
 
 ### 0.3.9-dev
+* Set Counter to 14  [[#](https://github.com/pantheon-systems/plugin-pipeline-example/pull/#)]
 
 ### 0.3.8 (21 December 2023)
 * Set Counter to 13 [[67](https://github.com/pantheon-systems/plugin-pipeline-example/pull/67)]
