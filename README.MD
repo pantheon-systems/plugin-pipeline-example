@@ -5,7 +5,7 @@ Tags: comments, spam
 Requires at least: 4.5  
 Tested up to: 6.2.1  
 Requires PHP: 5.6  
-Stable tag: 0.3.9  
+Stable tag: 0.3.10-dev  
 License: GPLv2 or later  
 License URI: https://www.gnu.org/licenses/gpl-2.0.html 
 
@@ -25,6 +25,8 @@ See the robots hard at work.
 * [Validate Readme Spacing](https://github.com/pantheon-systems/validate-readme-spacing/)
 
 ## Changelog
+
+### 0.3.10-dev
 
 ### 0.3.9
 * Set Counter to 14  [[70](https://github.com/pantheon-systems/plugin-pipeline-example/pull/70)]
