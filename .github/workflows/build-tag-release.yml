@@ -20,9 +20,10 @@ jobs:
     - id: set-outputs
       run: |
         echo "Changed files: ${{ steps.get-changed-files.outputs.all }}"
+        shopt -s nocasematch
         maybe_asset_only="true"
         for file in ${{ steps.get-changed-files.outputs.all }}; do
-          if [[ $file =~ ^\.wordpress\.org/ ]] && [[ $file != "readme.txt" ]]; then
+          if [[ $file =~ ^\.wordpress\.org/ ]] && [[ $file != "readme.txt" ]] && [[ $file != "readme.md" ]]; then
             maybe_asset_only="false"
             break
           fi
