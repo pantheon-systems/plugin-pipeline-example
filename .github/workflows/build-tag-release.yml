@@ -55,6 +55,8 @@ jobs:
         build_node_assets: "true"
         build_composer_assets: "true"
   prepare_dev:
+    needs: check-status
+    if: ${{ needs.check-status.outputs.maybe-asset-only == 'false' }}
     name: Update Dev environment for the next version
     runs-on: ubuntu-latest
     steps:
