@@ -10,6 +10,7 @@ permissions:
 
 jobs:
   check-status:
+    name: Check status
     runs-on: ubuntu-latest
     outputs:
       maybe-asset-only: ${{ steps.set-outputs.outputs.maybe-asset-only }}
@@ -30,6 +31,7 @@ jobs:
         done
         echo "::set-output name=maybe-asset-only::$maybe_asset_only"
   asset-only:
+    name: Asset-only update
     needs: check-status
     if: ${{ needs.check-status.outputs.maybe-asset-only == 'true' }}
     runs-on: ubuntu-latest
