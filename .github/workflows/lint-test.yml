@@ -70,4 +70,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: jazzsequence/action-validate-plugin-version@v0
+      - uses: jazzsequence/action-validate-plugin-version@fix-stuff
