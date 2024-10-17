@@ -65,3 +65,9 @@ jobs:
       - uses: pantheon-systems/validate-readme-spacing@v1
         with:
           filepath: 'README.MD'
+  validate-plugin-version:
+    name: Validate Plugin Tested Up To Version
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: jazzsequence/action-validate-plugin-version@v0
