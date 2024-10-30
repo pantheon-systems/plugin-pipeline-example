@@ -7,10 +7,6 @@ on:
       - synchronize
       - ready_for_review
 
-permissions:
-  pull-requests: write
-  contents: write
-
 jobs:
   lint-test:
     runs-on: ubuntu-latest
@@ -69,11 +65,3 @@ jobs:
       - uses: pantheon-systems/validate-readme-spacing@v1
         with:
           filepath: 'README.MD'
-  validate-plugin-version:
-    name: Validate Plugin Tested Up To Version
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: jazzsequence/action-validate-plugin-version@v1
-        with:
-          filenames: 'readme.txt,README.MD'
