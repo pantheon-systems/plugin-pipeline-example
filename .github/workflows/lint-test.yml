@@ -7,6 +7,10 @@ on:
       - synchronize
       - ready_for_review
 
+permissions:
+  pull-requests: write
+  contents: write
+
 jobs:
   lint-test:
     runs-on: ubuntu-latest
@@ -16,7 +20,7 @@ jobs:
       DB_PASSWORD: root
       DB_HOST: localhost
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Install NPM & Composer dependencies
         run: |
           composer install
@@ -39,7 +43,7 @@ jobs:
     runs-on: ubuntu-latest
     name: WP.org Code Analysis
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: WP.org Code Analysis
         uses: pantheon-systems/action-wporg-validator@1.0.0
         with:
@@ -48,7 +52,7 @@ jobs:
     runs-on: ubuntu-latest
     name: PHP Compatibility
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - run: echo "Note these tests may be incomplete for newer PHP version and miss some deprecations"
         shell: bash
       - name: PHPCompatibility
@@ -61,7 +65,13 @@ jobs:
     name: Validate README Spacing
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: pantheon-systems/validate-readme-spacing@v1
         with:
           filepath: 'README.MD'
+  validate-plugin-version:
+    name: Validate Plugin Tested Up To Version
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: jazzsequence/action-validate-plugin-version@v0
