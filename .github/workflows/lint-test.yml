@@ -69,5 +69,5 @@ jobs:
     name: Validate Plugin Tested Up To Version
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: jazzsequence/action-validate-plugin-version@fix-stuff
+      - uses: actions/checkout@v4
+      - uses: jazzsequence/action-validate-plugin-version@v0
