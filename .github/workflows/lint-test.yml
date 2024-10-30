@@ -74,4 +74,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: jazzsequence/action-validate-plugin-version@v0
+      - uses: jazzsequence/action-validate-plugin-version@v1
+        with:
+          filenames: 'readme.txt,README.MD'
