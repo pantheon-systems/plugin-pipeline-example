@@ -7,6 +7,10 @@ on:
       - synchronize
       - ready_for_review
 
+permissions:
+  pull-requests: write
+  contents: write
+
 jobs:
   lint-test:
     runs-on: ubuntu-latest
