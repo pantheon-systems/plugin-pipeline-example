@@ -66,7 +66,7 @@ jobs:
             git checkout -b ${PR_BRANCH}
             git add source/releasenotes/${RELEASE_NOTE_FILENAME}
             git commit -m "Add release notes for ${REPO_NAME} ${{ github.event.release.tag_name }}"
-            git push --set-upstream origin releasenote-${RELEASE_NOTE_FILENAME}
+            git push --set-upstream origin ${PR_BRANCH}
 
             RETRIES=0
             while ! git ls-remote --heads origin ${PR_BRANCH} | grep -q "${PR_BRANCH}"; do
