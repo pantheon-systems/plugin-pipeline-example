@@ -68,10 +68,6 @@ jobs:
             git commit -m "Add release notes for ${REPO_NAME} ${{ github.event.release.tag_name }}"
             git push --set-upstream origin releasenote-${RELEASE_NOTE_FILENAME}
 
-            echo "Debugging branch differences"
-            git log ${BASE_BRANCH}..${PR_BRANCH} --oneline
-            git diff --name-only ${BASE_BRANCH}..${PR_BRANCH}
-
             echo "Create pull request"
             gh pr create \
               --repo jazzsequence/documentation \
