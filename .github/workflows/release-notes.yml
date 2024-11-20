@@ -47,7 +47,7 @@ jobs:
 
 
             echo "Cloning the docs repo"
-            git clone https://github.com/pantheon-systems/documentation.git
+            git clone https://github.com/jazzsequence/documentation.git
             echo "Copying the release notes"
             mv "${{ env.release_notes_path }}" documentation/source/releasenotes/${RELEASE_NOTE_FILENAME}
             cat ${RELEASE_NOTE_FILENAME}
