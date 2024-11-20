@@ -63,7 +63,7 @@ jobs:
             git config --global user.name "Pantheon Bot"
             git config --global user.email "bot@getpantheon.com"
             git remote set-url origin https://${{ secrets.TOKEN }}@github.com/jazzsequence/documentation.git            
-            git checkout -b releasenote-${RELEASE_NOTE_FILENAME}
+            git checkout -b ${PR_BRANCH}
             git add source/releasenotes/${RELEASE_NOTE_FILENAME}
             git commit -m "Add release notes for ${REPO_NAME} ${{ github.event.release.tag_name }}"
             git push --set-upstream origin releasenote-${RELEASE_NOTE_FILENAME}
