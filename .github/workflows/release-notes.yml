@@ -63,7 +63,7 @@ jobs:
               echo "Error: Release notes file not found at ${{ env.release_notes_path }}"
               exit 1
             fi
-            cat ${RELEASE_NOTE_FILENAME}
+            cat documentation/source/releasenotes/"${RELEASE_NOTE_FILENAME}"
 
             cd documentation
 
