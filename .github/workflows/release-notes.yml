@@ -35,6 +35,10 @@ jobs:
           echo "repo_name=${REPO_NAME}" >> $GITHUB_ENV
           echo "release_note_categories=${CATEGORIES}" >> $GITHUB_ENV
           echo "release_link=${RELEASE_LINK}" >> $GITHUB_ENV
+      - name: Debug generated file
+        run: |
+            ls -l $(pwd)
+            cat release-note.md
       - name: Copy Release Notes & Create PR
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
@@ -49,7 +53,16 @@ jobs:
             echo "Cloning the docs repo"
             git clone https://github.com/jazzsequence/documentation.git
             echo "Copying the release notes"
-            mv "${{ env.release_notes_path }}" documentation/source/releasenotes/${RELEASE_NOTE_FILENAME}
+            echo "Current directory: $(pwd)"
+            ls -l
+            ls -l documentation/source/releasenotes/
+            if [ -f "${{ env.release_notes_path }}" ]; then
+              mv "${{ env.release_notes_path }}" documentation/source/releasenotes/${RELEASE_NOTE_FILENAME}
+              echo "Release notes copied successfully."
+            else
+              echo "Error: Release notes file not found at ${{ env.release_notes_path }}"
+              exit 1
+            fi
             cat ${RELEASE_NOTE_FILENAME}
 
             cd documentation
