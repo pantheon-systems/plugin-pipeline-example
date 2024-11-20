@@ -69,7 +69,7 @@ jobs:
 
             echo "Create pull request"
             gh pr create \
-              --repo pantheon-systems/documentation \
+              --repo jazzsequence/documentation \
               --base main \
               --head ${PR_BRANCH} \
               --title "${PR_TITLE}" \
