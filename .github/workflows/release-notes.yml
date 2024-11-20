@@ -71,7 +71,7 @@ jobs:
             gh pr create \
               --repo jazzsequence/documentation \
               --base hackathon24-release-notes-action \
-              --head jazzsequence:${PR_BRANCH} \
+              --head ${PR_BRANCH} \
               --title "${PR_TITLE}" \
               --body "${PR_BODY}"
             
