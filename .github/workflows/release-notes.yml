@@ -70,8 +70,8 @@ jobs:
             echo "Create pull request"
             gh pr create \
               --repo jazzsequence/documentation \
-              --base main \
-              --head ${PR_BRANCH} \
+              --base jazzsequence:main \
+              --head jazzsequence:${PR_BRANCH} \
               --title "${PR_TITLE}" \
               --body "${PR_BODY}"
             
