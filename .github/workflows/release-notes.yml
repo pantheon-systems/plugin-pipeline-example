@@ -68,6 +68,18 @@ jobs:
             git commit -m "Add release notes for ${REPO_NAME} ${{ github.event.release.tag_name }}"
             git push --set-upstream origin releasenote-${RELEASE_NOTE_FILENAME}
 
+            RETRIES=0
+            while ! git ls-remote --heads origin ${PR_BRANCH} | grep -q "${PR_BRANCH}"; do
+              RETRIES=$((RETRIES+1))
+              if [ ${RETRIES} -ge 5 ]; then
+                echo "Branch ${PR_BRANCH} still not found after 5 retries. Exiting..."
+                exit 1
+              fi
+              echo "Branch ${PR_BRANCH} not found on remote. Waiting for propagation...(${RETRIES}/5)"
+              sleep 5
+            done
+            echo "Branch ${PR_BRANCH} exists on remote."
+
             echo "Create pull request"
             gh pr create \
               --repo jazzsequence/documentation \
