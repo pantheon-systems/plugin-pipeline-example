@@ -45,7 +45,7 @@ jobs:
         run: |
           REPO_SLUG=$(basename "${{ github.repository }}")
           PR_TITLE="Release notes for ${{ env.repo_name }} ${{ github.event.release.tag_name }}"
-          RELEASE_NOTE_FILENAME="${{ env.release_date }}-${REPO_SLUG}-${{ github.event.release.tag_name }}.md"
+          RELEASE_NOTE_FILENAME="${{ env.release_date }}-${REPO_SLUG}-$(echo "${{ github.event.release.tag_name }}" | tr '.' '-').md"
           PR_BODY="* **[Release Notes](https://docs.pantheon.io/releasenotes)** - Adds a release note for ${{ env.repo_name }} [${{ github.event.release.tag_name }}](https://github.com/${{ github.repository }}/releases/tag/${{ github.event.release.tag_name }})."
           PR_BRANCH="releasenote-${{ env.release_date }}-${REPO_SLUG}-${{ github.event.release.tag_name }}"
 
