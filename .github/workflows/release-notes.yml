@@ -44,7 +44,6 @@ jobs:
           RELEASE_NOTE_FILENAME="${{ env.release_date }}-${REPO_SLUG}-$(echo "${{ github.event.release.tag_name }}" | tr '.' '-').md"
           PR_BODY="* **[Release Notes](https://docs.pantheon.io/releasenotes)** - Adds a release note for ${{ env.repo_name }} [${{ github.event.release.tag_name }}](https://github.com/${{ github.repository }}/releases/tag/${{ github.event.release.tag_name }})."
           PR_BRANCH="releasenote-${{ env.release_date }}-${REPO_SLUG}-${{ github.event.release.tag_name }}"
-          BASE_BRANCH="${{ github.event.release.target_commitish }}"
 
           echo "Cloning the docs repo"
           git clone https://github.com/jazzsequence/documentation.git
@@ -76,8 +75,8 @@ jobs:
             echo "Create pull request"
             gh pr create \
               --repo jazzsequence/documentation \
-              --base ${BASE_BRANCH} \
-              --head jazzsequence:${PR_BRANCH} \
+              --base main \
+              --head ${PR_BRANCH} \
               --title "${PR_TITLE}" \
               --body "${PR_BODY}"
             
