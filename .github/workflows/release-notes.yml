@@ -15,7 +15,5 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.TOKEN }}
         with:
-          github_token: ${{ secrets.TOKEN }}
-          docs_repo: jazzsequence/documentation
           repo_name: Plugin Pipeline Example
           categories: wordpress,plugins
