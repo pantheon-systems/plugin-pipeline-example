@@ -10,14 +10,11 @@ jobs:
       contents: read
 
     steps:
-      - name: (Debugging) Checkout Action Repository
-        uses: actions/checkout@v4
-        with:
-            repository: pantheon-systems/action-release-notes
       - name: Generate release notes
         uses: pantheon-systems/action-release-notes@main
         with:
-          github_token: ${{ secrets.token }}
+          token: ${{ secrets.TOKEN }}
+          github_token: ${{ secrets.TOKEN }}
           docs_repo: jazzsequence/documentation
           repo_name: Plugin Pipeline Example
           categories: wordpress,plugins
