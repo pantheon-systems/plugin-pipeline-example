@@ -12,8 +12,9 @@ jobs:
     steps:
       - name: Generate release notes
         uses: pantheon-systems/action-release-notes@main
+        env:
+          GH_TOKEN: ${{ secrets.TOKEN }}
         with:
-          token: ${{ secrets.TOKEN }}
           github_token: ${{ secrets.TOKEN }}
           docs_repo: jazzsequence/documentation
           repo_name: Plugin Pipeline Example
