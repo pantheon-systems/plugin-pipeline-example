@@ -6,6 +6,8 @@ on:
 jobs:
   add-release-notes:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
 
     steps:
       - name: Generate release notes
