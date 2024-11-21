@@ -10,6 +10,10 @@ jobs:
       contents: read
 
     steps:
+      - name: (Debugging) Checkout Action Repository
+        uses: actions/checkout@v4
+        with:
+            repository: pantheon-systems/action-release-notes
       - name: Generate release notes
         uses: pantheon-systems/action-release-notes@main
         with:
