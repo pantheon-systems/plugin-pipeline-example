@@ -2,6 +2,7 @@ name: Validate Tested Up To Version
 on:
   schedule:
     - cron: '0 0 * * 0'
+  workflow_dispatch:
 
 permissions:
   pull-requests: write
