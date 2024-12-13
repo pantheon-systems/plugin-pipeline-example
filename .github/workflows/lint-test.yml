@@ -62,6 +62,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: pantheon-systems/validate-readme-spacing@v1
+      - uses: pantheon-systems/validate-readme-spacing@v1.0.5
         with:
           filepath: 'README.MD'
