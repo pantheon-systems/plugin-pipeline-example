@@ -21,17 +21,12 @@ jobs:
         run: |
           composer install
           npm install
-      - name: Setup MySQL
+      - name: Start MySQL
         run: |
           sudo /etc/init.d/mysql start
-          mysql -e 'CREATE DATABASE IF NOT EXISTS wordpress_test;' -uroot -proot
-          mysql -e 'SHOW DATABASES;' -uroot -proot
+          mysqladmin -V
       - name: Setup WP-CLI
         uses: godaddy-wordpress/setup-wp-cli@1
-      - name: Run Environment checks
-        run: |
-          php -v
-          mysqladmin -V
       - name: Run linter
         run: composer lint
       - name: Run tests
