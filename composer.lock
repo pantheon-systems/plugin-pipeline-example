@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f3f28993d72e782b110511c37a4ab5c1",
+    "content-hash": "bc62875379c611a26e8ebe2bd9a4ce83",
     "packages": [],
     "packages-dev": [
         {
@@ -1266,6 +1266,52 @@
                 "source": "https://github.com/pantheon-systems/Pantheon-WP-Coding-Standards/tree/2.0.1"
             },
             "time": "2023-12-12T16:18:18+00:00"
+        },
+        {
+            "name": "pantheon-systems/wpunit-helpers",
+            "version": "v2.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pantheon-systems/wpunit-helpers.git",
+                "reference": "8e767a2d59abc16b4fc5bedc12e0adbb87554044"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pantheon-systems/wpunit-helpers/zipball/8e767a2d59abc16b4fc5bedc12e0adbb87554044",
+                "reference": "8e767a2d59abc16b4fc5bedc12e0adbb87554044",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^2.0"
+            },
+            "require-dev": {
+                "squizlabs/php_codesniffer": "^3.7"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "Pantheon\\WPUnitHelpers\\Plugin"
+            },
+            "autoload": {
+                "psr-4": {
+                    "Pantheon\\WPUnitHelpers\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pantheon",
+                    "email": "noreply@pantheon.io"
+                }
+            ],
+            "description": "Unified scripts for installing and running automated WP Unit Tests.",
+            "support": {
+                "issues": "https://github.com/pantheon-systems/wpunit-helpers/issues",
+                "source": "https://github.com/pantheon-systems/wpunit-helpers/tree/v2.0.2"
+            },
+            "time": "2025-01-06T18:07:41+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -5700,7 +5746,7 @@
     },
     "prefer-stable": true,
     "prefer-lowest": false,
-    "platform": [],
-    "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "platform": {},
+    "platform-dev": {},
+    "plugin-api-version": "2.6.0"
 }
