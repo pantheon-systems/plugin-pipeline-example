@@ -21,20 +21,16 @@ jobs:
         run: |
           composer install
           npm install
-      - name: Setup MySQL
+      - name: Start MySQL
         run: |
           sudo /etc/init.d/mysql start
-          mysql -e 'CREATE DATABASE IF NOT EXISTS wordpress_test;' -uroot -proot
-          mysql -e 'SHOW DATABASES;' -uroot -proot
-      - name: Install WP Unit tests
-        run: |
-          php -v
           mysqladmin -V
-          bash .bin/install-wp-tests.sh wordpress_test root root localhost latest true
+      - name: Setup WP-CLI
+        uses: godaddy-wordpress/setup-wp-cli@1
       - name: Run linter
         run: composer lint
       - name: Run tests
-        run: composer test
+        run: bash ./bin/phpunit-test.sh
   wporg-code-analysis:
     runs-on: ubuntu-latest
     name: WP.org Code Analysis

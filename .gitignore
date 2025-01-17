@@ -10,6 +10,12 @@ node_modules/
 
 /vendor/
 
+# WPUnit Helpers
+bin/helpers.sh
+bin/install-local-tests.sh
+bin/install-wp-tests.sh
+bin/phpunit-test.sh
+
 # Built files
 assets/css/*.css
 assets/css/*.css.map
