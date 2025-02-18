@@ -1,0 +1,20 @@
+name: Create Release Notes PR
+on:
+  release:
+    types: [published]
+
+jobs:
+  add-release-notes:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Generate release notes
+        uses: pantheon-systems/action-release-notes@develop
+        env:
+          GH_TOKEN: ${{ secrets.TOKEN }}
+        with:
+          github_token: ${{ secrets.TOKEN }}
+          repo_name: Plugin Pipeline Example
+          categories: wordpress,plugins
