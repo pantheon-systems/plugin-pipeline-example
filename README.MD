@@ -3,7 +3,7 @@ Contributors: [getpantheon](https://profiles.wordpress.org/getpantheon)
 Donate link: https://example.com/  
 Tags: comments, spam  
 Requires at least: 4.5  
-Tested up to: 6.7.1  
+Tested up to: 6.7.2  
 Requires PHP: 5.6  
 Stable tag: 0.3.9  
 License: GPLv2 or later  
