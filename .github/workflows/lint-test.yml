@@ -37,7 +37,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: WP.org Code Analysis
-        uses: pantheon-systems/action-wporg-validator@v1.1.5
+        uses: pantheon-systems/action-wporg-validator@v2.0.0
         with:
           type: plugin
   phpcompatibility:
