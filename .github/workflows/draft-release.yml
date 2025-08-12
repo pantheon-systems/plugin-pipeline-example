@@ -13,7 +13,7 @@ jobs:
     name: Draft Release PR
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
     - name: Draft Release PR
       uses: pantheon-systems/plugin-release-actions/release-pr@v0
       with:
