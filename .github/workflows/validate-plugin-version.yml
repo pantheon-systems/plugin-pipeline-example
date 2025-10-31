@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v5
         with:
           fetch-depth: 0
-      - uses: jazzsequence/action-validate-plugin-version@v1
+      - uses: jazzsequence/action-validate-plugin-version@v2
         with:
           filenames: 'readme.txt,README.MD'
           branch: 'release'
