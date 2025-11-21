@@ -15,7 +15,7 @@ jobs:
     outputs:
       maybe-asset-only: ${{ steps.set-outputs.outputs.maybe-asset-only }}
     steps:
-    - uses: actions/checkout@v5
+    - uses: actions/checkout@v6
     - id: get-changed-files
       uses: jitterbit/get-changed-files@v1
     - id: set-outputs
@@ -47,7 +47,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
-      uses: actions/checkout@v5
+      uses: actions/checkout@v6
     - name: Build, tag, and release
       uses: pantheon-systems/plugin-release-actions/build-tag-release@v0
       with:
@@ -61,6 +61,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
-      uses: actions/checkout@v5
+      uses: actions/checkout@v6
     - name: Prepare Dev
       uses: pantheon-systems/plugin-release-actions/prepare-dev@v0
