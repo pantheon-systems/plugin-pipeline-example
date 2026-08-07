@@ -1,0 +1,84 @@
+name: Playwright BDD Tests
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tests/playwright/**'
+      - '.github/workflows/playwright-bdd.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'tests/playwright/**'
+      - '.github/workflows/playwright-bdd.yml'
+  workflow_dispatch:
+    inputs:
+      skip_multidev:
+        description: 'Skip multidev creation (test against existing env)'
+        required: false
+        default: 'true'
+        type: string
+
+jobs:
+  playwright-bdd:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: tests/playwright
+    env:
+      HEADLESS: 'true'
+      TERMINUS_SITE: wp-test-august
+      SKIP_MULTIDEV: ${{ inputs.skip_multidev || 'true' }}
+      WP_URL: https://live-wp-test-august.pantheonsite.io
+      WP_USER: ${{ vars.WP_USER || 'pantheon' }}
+      WP_PASSWORD: ${{ secrets.WP_PASSWORD }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Fetch framework repo
+        uses: actions/checkout@v4
+        with:
+          repository: pantheon-systems/qa-e2e-automation
+          path: qa-e2e-automation
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build framework
+        run: |
+          cd ${{ github.workspace }}/qa-e2e-automation
+          npm install
+          npm run build
+
+      - name: Install dependencies
+        run: |
+          npm pkg set dependencies.qa-e2e-automation-framework="file:${{ github.workspace }}/qa-e2e-automation"
+          npm install
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Generate BDD test specs
+        run: npx bddgen
+
+      - name: Run Playwright BDD tests
+        run: npx playwright test --grep @plugin-pipeline
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-test-results
+          path: tests/playwright/test-results/
+
+      - name: Upload HTML report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: tests/playwright/playwright-report/
