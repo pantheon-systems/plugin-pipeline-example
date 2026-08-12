@@ -1,67 +1,59 @@
 name: Playwright BDD Tests
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'tests/playwright/**'
-      - '.github/workflows/playwright-bdd.yml'
   pull_request:
     branches: [main]
     paths:
       - 'tests/playwright/**'
       - '.github/workflows/playwright-bdd.yml'
   workflow_dispatch:
-    inputs:
-      skip_multidev:
-        description: 'Skip multidev creation (test against existing env)'
-        required: false
-        default: 'true'
-        type: string
 
 jobs:
   playwright-bdd:
+    name: Playwright BDD Tests
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     defaults:
       run:
         working-directory: tests/playwright
     env:
       HEADLESS: 'true'
       TERMINUS_SITE: wp-test-august
-      SKIP_MULTIDEV: ${{ inputs.skip_multidev || 'true' }}
-      WP_URL: https://live-wp-test-august.pantheonsite.io
-      WP_USER: ${{ vars.WP_USER || 'pantheon' }}
-      WP_PASSWORD: ${{ secrets.WP_PASSWORD }}
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      - name: Fetch framework repo
-        uses: pantheon-systems/action-fetch-dependency@3deb6f872492dd088f30442c971237e79e881450
+      - name: Install Terminus
+        uses: pantheon-systems/terminus-github-actions@8e024bd89ff46ed2aa4e0663c6b54c87a94344f8 # v1.2.7
         with:
-          repository: pantheon-systems/qa-e2e-automation
-          destination: /tmp/qa-e2e-automation
-          validate-checksum: false
+          pantheon-machine-token: ${{ secrets.TERMINUS_TOKEN }}
+
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@dc588b651fe13675774614f8e6a936a468676387 # v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          log-public-key: true
+
+      - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh
+          printf "Host *\n  StrictHostKeyChecking no\n  UserKnownHostsFile=/dev/null\n" > ~/.ssh/config
 
       - name: Install dependencies
-        run: |
-          npm pkg set dependencies.qa-e2e-automation-framework="file:/tmp/qa-e2e-automation"
-          npm install
+        run: npm ci
 
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
 
-      - name: Generate BDD test specs
-        run: npx bddgen
-
       - name: Run Playwright BDD tests
-        run: npx playwright test --grep @plugin-pipeline
+        run: npm test
 
       - name: Upload test results
         if: always()

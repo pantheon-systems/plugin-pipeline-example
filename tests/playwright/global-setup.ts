@@ -1,86 +1,56 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { execSync } from 'child_process';
+import {
+  terminusExec,
+  generateMultidevName,
+  getSiteEnv,
+  ensureConnectionMode,
+  waitForWorkflows,
+} from 'cms-bdd';
+import { installBranchPlugin } from './lib/deploy';
 
 const STATE_FILE = path.join(__dirname, '.test-state.json');
-
-function terminusExec(command: string, timeout = 120000): string {
-  return execSync(`terminus ${command}`, {
-    encoding: 'utf-8',
-    timeout,
-    stdio: ['pipe', 'pipe', 'pipe'],
-  }).trim();
-}
-
-function generateMultidevName(): string {
-  const id = Math.random().toString(36).substring(2, 7);
-  return `ci-${id}`;
-}
-
-async function waitForWorkflow(siteEnv: string, maxWaitMs = 300000): Promise<void> {
-  const start = Date.now();
-  const pollInterval = 15000;
-  const [siteName, envName] = siteEnv.split('.');
-
-  while (Date.now() - start < maxWaitMs) {
-    try {
-      const output = terminusExec(
-        `workflow:list ${siteName} --fields=workflow,status,env --format=json`,
-        30000
-      );
-      const workflows = JSON.parse(output);
-      const envWorkflows = Object.values(workflows).filter(
-        (w: any) => w.env === envName
-      );
-      const failed = envWorkflows.find((w: any) => w.status === 'failed');
-      if (failed) {
-        throw new Error(`Workflow failed on ${siteEnv}: ${(failed as any).workflow}`);
-      }
-      const running = envWorkflows.find((w: any) => w.status === 'running');
-      if (!running) {
-        console.log('[setup] No running workflows, environment ready');
-        return;
-      }
-      console.log(`[setup] Workflow still running: ${(running as any).workflow}`);
-    } catch (e: any) {
-      if (e.message?.includes('Workflow failed')) throw e;
-    }
-    await new Promise(r => setTimeout(r, pollInterval));
-  }
-  throw new Error(`Timed out waiting for workflows on ${siteEnv}`);
-}
+const ADMIN_USER = 'pantheon';
+const PLUGIN_SLUG = 'rossums-universal-robots';
 
 async function globalSetup(): Promise<void> {
-  if (process.env.SKIP_MULTIDEV === 'true') {
-    console.log('[setup] SKIP_MULTIDEV=true, skipping multidev setup');
-    return;
-  }
-
   const baseSite = process.env.TERMINUS_SITE || 'wp-test-august';
-  console.log(`[setup] Starting WordPress multidev setup for ${baseSite}...`);
 
   const multidevName = generateMultidevName();
-  console.log(`[setup] Creating multidev: ${multidevName}`);
-
+  console.log(`[setup] Creating multidev ${multidevName} on ${baseSite}...`);
   terminusExec(`multidev:create ${baseSite}.dev ${multidevName}`, 600000);
 
-  const siteEnv = `${baseSite}.${multidevName}`;
-  console.log('[setup] Waiting for multidev to be ready...');
-  await waitForWorkflow(siteEnv);
-
   const wpUrl = `https://${multidevName}-${baseSite}.pantheonsite.io`;
+  const siteEnv = getSiteEnv(wpUrl, baseSite);
+
+  console.log('[setup] Waiting for workflows to settle...');
+  // wp-test-august is a shared fixture site, so this can also see workflows
+  // from other repos' concurrent CI runs, not just this multidev's create.
+  await waitForWorkflows(baseSite);
+
+  console.log('[setup] Switching to SFTP and deploying the plugin...');
+  await ensureConnectionMode('sftp', wpUrl);
+  installBranchPlugin(siteEnv);
+
+  console.log('[setup] Activating the plugin and setting a fresh admin password...');
+  const adminPassword = execSync('openssl rand -hex 8').toString().trim();
+  terminusExec(`wp ${siteEnv} -- plugin activate ${PLUGIN_SLUG}`, 60000);
+  terminusExec(`wp ${siteEnv} -- user update ${ADMIN_USER} --user_pass=${adminPassword}`, 60000);
+
+  // Playwright forks test workers after globalSetup returns, so they inherit
+  // these env vars. See the comment on `use.baseURL` in playwright.config.ts
+  // for why step definitions read these directly instead.
   process.env.WP_URL = wpUrl;
+  process.env.WP_USER = ADMIN_USER;
+  process.env.WP_PASSWORD = adminPassword;
 
-  fs.writeFileSync(STATE_FILE, JSON.stringify({
-    multidevName,
-    url: wpUrl,
-    siteEnv,
-    siteName: baseSite,
-  }, null, 2));
+  fs.writeFileSync(
+    STATE_FILE,
+    JSON.stringify({ multidevName, url: wpUrl, siteEnv, siteName: baseSite }, null, 2)
+  );
 
-  console.log(`[setup] WP_URL set to ${wpUrl}`);
-  console.log(`[setup] State written to ${STATE_FILE}`);
-  console.log('[setup] Multidev setup complete');
+  console.log(`[setup] Multidev ready at ${wpUrl}`);
 }
 
 export default globalSetup;

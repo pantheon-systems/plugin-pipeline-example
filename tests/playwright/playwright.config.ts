@@ -7,9 +7,8 @@ dotenv.config();
 const testDir = defineBddConfig({
   features: 'features/**/*.feature',
   steps: [
-    'node_modules/qa-e2e-automation-framework/dist/steps/ui/**/*.js',
-    'node_modules/qa-e2e-automation-framework/dist/steps/backend/**/*.js',
-    'node_modules/qa-e2e-automation-framework/dist/fixtures/customFixtures.js',
+    'steps/**/*.ts',
+    'node_modules/cms-bdd/dist/fixtures/customFixtures.js',
   ],
 });
 
@@ -30,14 +29,23 @@ export default defineConfig({
   ],
   timeout: 300000,
   use: {
-    baseURL: process.env.WP_URL || 'https://live-wp-test-august.pantheonsite.io',
+    // Local-dev convenience only. This is resolved once when the config module
+    // loads, before globalSetup creates the multidev, so it's frozen at whatever
+    // WP_URL was set at process start. Step definitions read `process.env.WP_URL`
+    // directly at call time instead of relying on Playwright's baseURL resolution,
+    // since globalSetup updates that env var (and Playwright forks test workers
+    // after globalSetup runs, so they inherit the updated value) but this frozen
+    // config value would not reflect it.
+    baseURL: process.env.WP_URL,
     headless,
     launchOptions: {
       slowMo,
     },
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
-    video: 'retain-on-failure',
+    // Always record, not just on failure -- the spike's acceptance criterion is
+    // "test execution is recorded as a video", not "on failure only".
+    video: 'on',
     actionTimeout: 10000,
     navigationTimeout: 30000,
   },
