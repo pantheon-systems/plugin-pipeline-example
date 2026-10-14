@@ -17,10 +17,8 @@ jobs:
       DB_HOST: localhost
     steps:
       - uses: actions/checkout@v6
-      - name: Install NPM & Composer dependencies
-        run: |
-          composer install
-          npm install
+      - name: Install Composer dependencies
+        run: composer install
       - name: Start MySQL
         run: |
           sudo /etc/init.d/mysql start
