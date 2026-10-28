@@ -1,6 +1,6 @@
 {
   "name": "plugin-pipeline-example",
-  "version": "0.3.10-dev",
+  "version": "0.3.10",
   "description": "A demo plugin to test and showcase github actions during plugin development and release",
   "main": "Gruntfile.js",
   "directories": {
