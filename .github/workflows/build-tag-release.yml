@@ -17,7 +17,7 @@ jobs:
     steps:
     - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
     - id: get-changed-files
-      uses: jitterbit/get-changed-files@v1
+      uses: jitterbit/get-changed-files@b17fbb00bdc0c0f63fcf166580804b4d2cdc2a42 # v1
     - id: set-outputs
       run: |
         echo "Changed files: ${{ steps.get-changed-files.outputs.all }}"
@@ -49,7 +49,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
     - name: Build, tag, and release
-      uses: pantheon-systems/plugin-release-actions/build-tag-release@v0
+      uses: pantheon-systems/plugin-release-actions/build-tag-release@554b455c9cb024ccf20147a27656fb198ce6f0cc # v0.5.5
       with:
         gh_token: ${{ secrets.GITHUB_TOKEN }}
         build_node_assets: "true"
@@ -63,4 +63,4 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
     - name: Prepare Dev
-      uses: pantheon-systems/plugin-release-actions/prepare-dev@v0
+      uses: pantheon-systems/plugin-release-actions/prepare-dev@554b455c9cb024ccf20147a27656fb198ce6f0cc # v0.5.5
