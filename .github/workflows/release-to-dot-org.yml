@@ -8,9 +8,9 @@ jobs:
     steps:
       - name: Deploy!
         run: exit 0
-      # - uses: actions/checkout@v2
+      # - uses: actions/checkout@0717577d45739eb3c851188b29f50ed6c0b2194e # v2.8.0
       # - name: WordPress Plugin Deploy
-      #   uses: 10up/action-wordpress-plugin-deploy@2.1.1
+      #   uses: 10up/action-wordpress-plugin-deploy@958b7fa0abf359af27e7e27c446cf5f4cc4660c7 # 2.1.1 2022-08-16T10:32:14Z
       #   env:
       #     SVN_USERNAME: ${{ secrets.WPORG_USERNAME }}
       #     SVN_PASSWORD: ${{ secrets.WPORG_PASSWORD }}
