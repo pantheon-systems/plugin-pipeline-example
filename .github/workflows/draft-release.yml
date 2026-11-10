@@ -15,6 +15,6 @@ jobs:
     steps:
     - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
     - name: Draft Release PR
-      uses: pantheon-systems/plugin-release-actions/release-pr@554b455c9cb024ccf20147a27656fb198ce6f0cc # v0.5.5
+      uses: pantheon-systems/plugin-release-actions/release-pr@ec0ee6ce8ee49452580d6bfe906ac47bc8527269 # v0.5.7
       with:
         gh_token: ${{ secrets.GITHUB_TOKEN }}
